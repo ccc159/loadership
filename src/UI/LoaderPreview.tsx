@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 export const LoaderPreview: React.FC<{ loader: ReactNode; name: string }> = ({ loader, name }) => {
   return (
     <div className='relative group'>
-      <div className='overflow-hidden aspect-w-1 aspect-h-1 bg-zinc-200'>
+      <div className='overflow-hidden aspect-w-1 aspect-h-1 bg-zinc-200 rounded-xl'>
         <div className='object-cover w-full aspect-square transition-all duration-300 group-hover:scale-150 flex items-center justify-center content-center loader-preview'>{loader}</div>
       </div>
       <div className='absolute left-3 top-3'>
