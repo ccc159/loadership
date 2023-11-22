@@ -10,7 +10,7 @@ export const LoaderGrid = () => {
           <p className='mt-4 text-base font-normal leading-7 text-gray-600'>Each loader has different configuration possibilities. Choose a loader you like to configure.</p>
         </div>
 
-        <div className='grid grid-cols-2 gap-6 md:grid-cols-3 md:gap-5 mt-10 lg:mt-16 lg:gap-4 lg:grid-cols-4'>
+        <div className='grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-5 mt-10 lg:mt-16 lg:gap-6 lg:grid-cols-4'>
           <LoaderPreview loader={<LoaderCircularDot />} name={'Circular Dot'} />
           <LoaderPreview loader={<LoaderCircularDot />} name={'Circular Dot'} />
           <LoaderPreview loader={<LoaderCircularDot />} name={'Circular Dot'} />

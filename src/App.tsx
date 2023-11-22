@@ -1,9 +1,12 @@
+import React from 'react';
 import { Header } from './UI/Header';
 import { LoaderGrid } from './UI/LoaderGrid';
+import { NumberInput } from './components/NumberInput';
 
 function App() {
+  const [value, setValue] = React.useState<number>(2);
   return (
-    <div className='overflow-x-hidden '>
+    <div className='overflow-x-hidden'>
       <Header />
       <section className='relative py-12 sm:py-16 lg:pt-20 xl:pb-0'>
         <div className='relative px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl'>
@@ -34,6 +37,7 @@ function App() {
           <LoaderGrid />
         </div>
       </section>
+      <NumberInput label='Dot size' value={value} onChange={setValue} min={1} max={12} />
     </div>
   );
 }
