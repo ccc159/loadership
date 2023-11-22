@@ -5,3 +5,9 @@
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
+
+.loader-preview {
+  .loader-controls {
+    display: none;
+  }
+}

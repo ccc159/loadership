@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export const Loader1 = () => {
+export const LoaderCircularDot = () => {
   const [numDots, setNumDots] = useState(4);
-  const [size, setSize] = useState(200);
+  const [size, setSize] = useState(100);
   const [dotSize, setDotSize] = useState(13);
   const [dotDistance, setDotDistance] = useState(24);
   const [loaderVersion, setLoaderVersion] = useState(1);
@@ -32,7 +32,7 @@ export const Loader1 = () => {
       }
       .loader_${loaderVersion} div {
       position: absolute;
-      top: 33px;
+      top: ${Math.floor(size - dotSize) / 2}px;
       width: ${dotSize}px;
       height: ${dotSize}px;
       border-radius: 50%;
@@ -85,14 +85,14 @@ export const Loader1 = () => {
   );
 
   return (
-    <section>
+    <>
       <style>{styles}</style>
-      <section>
+      <section className='loader-controls'>
         <input type='number' value={numDots} onChange={(v) => setNumDots(parseInt(v.target.value))} />
         <input type='number' value={dotSize} onChange={(v) => setDotSize(parseInt(v.target.value))} />
         <input type='number' value={dotDistance} onChange={(v) => setDotDistance(parseInt(v.target.value))} />
       </section>
       {loader}
-    </section>
+    </>
   );
 };
