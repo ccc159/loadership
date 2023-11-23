@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Card } from '../components/Card';
 import { NumberInput } from '../components/NumberInput';
-import { CodeDisplay } from '../components/CodeDispay';
+import { CodeDisplay } from '../components/CodeDisplay';
+import ReactDOMServer from 'react-dom/server';
 
 export const LoaderCircularDot = () => {
   const [numDots, setNumDots] = useState(4);
@@ -77,6 +77,17 @@ export const LoaderCircularDot = () => {
   }
   `;
 
+  const html = (
+    <div className={`loader_${loaderVersion}`}>
+      <style>{styles}</style>
+      {Array(numDots + 1)
+        .fill(0)
+        .map((_, i) => (
+          <div key={i}></div>
+        ))}
+    </div>
+  );
+
   return (
     <section className='px-6 py-12 bg-white md:px-12 lg:px-24 w-full flex flex-col gap-6 md:gap-12 md:flex-row justify-center items-center'>
       <section className='flex flex-col gap-6 max-w-lg w-full'>
@@ -88,32 +99,9 @@ export const LoaderCircularDot = () => {
       </section>
       <section className='flex flex-col max-w-lg w-full'>
         <div className='w-full p-4 border border-gray-200 bg-gray-100 rounded-t-xl'></div>
-        <div className='flex justify-center items-center h-60 p-0 bg-gray-50 border-gray-200 bg-gradient-to-r border-x'>
-          <div className={`loader_${loaderVersion}`}>
-            <style>{styles}</style>
-            {Array(numDots + 1)
-              .fill(0)
-              .map((_, i) => (
-                <div key={i}></div>
-              ))}
-          </div>
-        </div>
-        <div className='relative border-gray-200 border-y border-x bg-gray-50'>
-          <div className='grid w-full grid-cols-2 border-b border-gray-200 bg-gray-50 rounded-t-md dark:bg-gray-700 dark:border-gray-600'>
-            <ul className='flex text-sm font-medium text-center text-gray-500 dark:text-gray-400'>
-              <li>
-                <span className='inline-block w-full p-2 px-3 text-gray-800 bg-gray-100 border-r border-gray-200'>HTML</span>
-              </li>
-              <li>
-                <span className='inline-block w-full p-2 px-3 text-gray-800 bg-gray-100 border-r border-gray-200'>CSS</span>
-              </li>
-            </ul>
-          </div>
-          <div className='p-4 max-h-[400px] overflow-y-auto'>
-            <CodeDisplay code={styles} language='css' />
-          </div>
-        </div>
-        <div className='w-full p-4 border border-gray-200 bg-gray-100 rounded-b-xl'></div>
+        <div className='flex justify-center items-center h-60 p-0 bg-gray-50 border-gray-200 bg-gradient-to-r border-x'>{html}</div>
+        <CodeDisplay css={styles} html={ReactDOMServer.renderToString(html)} />
+        <div className='w-full p-1 border border-gray-200 border-t-0 bg-gray-100 rounded-b-xl'></div>
       </section>
     </section>
   );
