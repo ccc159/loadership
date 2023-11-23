@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 export const Header = () => {
   return (
     <header className='relative py-4 md:py-6'>
@@ -36,14 +37,12 @@ export const Header = () => {
               Community Groups{' '}
             </a>
 
-            <a
-              href='#'
-              title=''
+            <Link
               className='text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2'
+              to={`license`}
             >
-              {' '}
-              Support{' '}
-            </a>
+              License
+            </Link>
           </div>
 
           <div className='hidden lg:flex lg:items-center lg:justify-center lg:space-x-10'>
