@@ -2,9 +2,11 @@ import React from 'react';
 import { Header } from './UI/Header';
 import { LoaderGrid } from './UI/LoaderGrid';
 import { NumberInput } from './components/NumberInput';
+import { ColorInput } from './components/ColorInput';
 
 function App() {
   const [value, setValue] = React.useState<number>(2);
+  const [color, setColor] = React.useState<string>('#FF44EC');
   return (
     <div className='overflow-x-hidden'>
       <Header />
@@ -38,6 +40,7 @@ function App() {
         </div>
       </section>
       <NumberInput label='Dot size' value={value} onChange={setValue} min={1} max={12} />
+      <ColorInput label='color' value={color} onChange={setColor} />
     </div>
   );
 }
