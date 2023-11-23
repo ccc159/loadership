@@ -74,16 +74,6 @@ export const LoaderCircularDot = () => {
   }
   `;
 
-  const loader = (
-    <div className={`loader_${loaderVersion}`}>
-      {Array(numDots + 1)
-        .fill(0)
-        .map((_, i) => (
-          <div key={i}></div>
-        ))}
-    </div>
-  );
-
   return (
     <>
       <style>{styles}</style>
@@ -92,7 +82,13 @@ export const LoaderCircularDot = () => {
         <input type='number' value={dotSize} onChange={(v) => setDotSize(parseInt(v.target.value))} />
         <input type='number' value={dotDistance} onChange={(v) => setDotDistance(parseInt(v.target.value))} />
       </section>
-      {loader}
+      <div className={`loader_${loaderVersion}`}>
+        {Array(numDots + 1)
+          .fill(0)
+          .map((_, i) => (
+            <div key={i}></div>
+          ))}
+      </div>
     </>
   );
 };

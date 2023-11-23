@@ -5,15 +5,15 @@ export const Header = () => {
       <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
         <div className='relative flex items-center justify-between'>
           <div className='flex-shrink-0'>
-            <a href='#' title='' className='flex rounded outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2'>
+            <Link to='/' className='flex rounded outline-none'>
               <img className='w-auto h-8' src='/logo.svg' alt='' /> Loadership
-            </a>
+            </Link>
           </div>
 
           <div className='flex lg:hidden'>
             <button type='button' className='text-gray-900'>
               <svg className='w-7 h-7' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-                <path stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M4 6h16M4 12h16M4 18h16'></path>
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='1.5' d='M4 6h16M4 12h16M4 18h16'></path>
               </svg>
             </button>
           </div>

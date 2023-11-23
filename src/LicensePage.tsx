@@ -3,7 +3,7 @@ export const LicensePage = () => {
     <section className='px-12 py-12 bg-white sm:px-6 sm:py-16 lg:px-20 lg:py-20'>
       <div className='flex-col items-center justify-center'>
         <h1 className='text-3xl font-extrabold text-gray-900 sm:text-4xl'>License Statement</h1>
-        <p className='mt-4 text-base font-normal leading-7 text-gray-600 '>
+        <div className='mt-4 text-base font-normal leading-7 text-gray-600 '>
           <p>
             <span className='font-extrabold'>Loadership</span> is licensed under a{' '}
             <a className='text-gray-600' href='https://creativecommons.org/licenses/by-nc/4.0/' target='_blank'>
@@ -44,7 +44,7 @@ export const LicensePage = () => {
             The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the
             material.
           </p>
-        </p>
+        </div>
       </div>
     </section>
   );

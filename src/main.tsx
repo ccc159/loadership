@@ -2,24 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import { ErrorPage } from './ErrorPage.tsx';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import { LicensePage } from './LicensePage.tsx';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: '/license',
-    element: <LicensePage />,
-  },
-]);
+import { LoaderCircularDot } from './loaders/LoaderCircularDot.tsx';
+import { Header } from './UI/Header.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path='/' errorElement={<ErrorPage />} element={<App />} />
+        <Route path='/license' element={<LicensePage />} />
+        <Route path='/loader1' element={<LoaderCircularDot />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
