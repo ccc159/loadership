@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import { NumberInput } from '../components/NumberInput';
 import { CodeDisplay } from '../components/CodeDisplay';
 import ReactDOMServer from 'react-dom/server';
+import { ColorInput } from '../components/ColorInput';
 
 export const LoaderCircularDot = () => {
+  const [backgroundColor, setBackgroundColor] = useState<string>('#d1d5db');
+
   const [numDots, setNumDots] = useState(4);
   const [size, setSize] = useState(100);
   const [dotSize, setDotSize] = useState(13);
@@ -98,8 +101,12 @@ export const LoaderCircularDot = () => {
         <NumberInput label='Dot distance' value={dotDistance} onChange={setDotDistance} />
       </section>
       <section className='flex flex-col max-w-lg w-full'>
-        <div className='w-full p-4 border border-gray-200 bg-gray-100 rounded-t-xl'></div>
-        <div className='flex justify-center items-center h-60 p-0 bg-gray-50 border-gray-200 bg-gradient-to-r border-x'>{html}</div>
+        <div className='w-full px-4 py-1 border border-gray-200 bg-gray-100 rounded-t-xl'>
+          <ColorInput minimal label='Background color' value={backgroundColor} onChange={setBackgroundColor} />
+        </div>
+        <div style={{ backgroundColor }} className='flex justify-center items-center min-h-[300px] p-4 border-gray-200 bg-gradient-to-r border-x'>
+          <div className='border border-gray-400'>{html}</div>
+        </div>
         <CodeDisplay css={styles} html={ReactDOMServer.renderToString(html)} />
         <div className='w-full p-1 border border-gray-200 border-t-0 bg-gray-100 rounded-b-xl'></div>
       </section>
