@@ -1,6 +1,6 @@
 export const LicensePage = () => {
   return (
-    <section className='px-12 py-12 bg-white sm:px-6 sm:py-16 lg:px-20 lg:py-20'>
+    <section className='px-12 py-12 bg-white sm:px-6 sm:py-16 lg:px-20 lg:py-20 max-w-7xl m-auto'>
       <div className='flex-col items-center justify-center'>
         <h1 className='text-3xl font-extrabold text-gray-900 sm:text-4xl'>License Statement</h1>
         <div className='mt-4 text-base font-normal leading-7 text-gray-600 '>

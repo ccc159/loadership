@@ -3,9 +3,11 @@ import { NumberInput } from '../components/NumberInput';
 import { CodeDisplay } from '../components/CodeDisplay';
 import ReactDOMServer from 'react-dom/server';
 import { ColorInput } from '../components/ColorInput';
+import { Checkbox } from '../components/Checkbox';
 
 export const LoaderCircularDot = () => {
   const [backgroundColor, setBackgroundColor] = useState<string>('#d1d5db');
+  const [showFrame, setShowFrame] = useState<boolean>(true);
 
   const [numDots, setNumDots] = useState(4);
   const [size, setSize] = useState(100);
@@ -31,14 +33,13 @@ export const LoaderCircularDot = () => {
 
   const styles = `
   .loader_${loaderVersion} {
-      display: inline-block;
+      display: block;
       position: relative;
-      width: ${size}px;
-      height: ${size}px;
+      width: ${numDots * dotDistance}px;
+      height: ${dotSize}px;
       }
       .loader_${loaderVersion} div {
       position: absolute;
-      top: ${Math.floor(size - dotSize) / 2}px;
       width: ${dotSize}px;
       height: ${dotSize}px;
       border-radius: 50%;
@@ -101,11 +102,12 @@ export const LoaderCircularDot = () => {
         <NumberInput label='Dot distance' value={dotDistance} onChange={setDotDistance} />
       </section>
       <section className='flex flex-col max-w-lg w-full'>
-        <div className='w-full px-4 py-1 border border-gray-200 bg-gray-100 rounded-t-xl'>
+        <div className='w-full px-4 py-1 border border-gray-200 bg-gray-100 rounded-t-xl flex items-center gap-3 justify-end'>
+          <Checkbox label='Show frame' value={showFrame} onCheck={setShowFrame} />
           <ColorInput minimal label='Background color' value={backgroundColor} onChange={setBackgroundColor} />
         </div>
         <div style={{ backgroundColor }} className='flex justify-center items-center min-h-[300px] p-4 border-gray-200 bg-gradient-to-r border-x'>
-          <div className='border border-gray-400'>{html}</div>
+          {showFrame ? <div className='border border-gray-800'>{html}</div> : html}
         </div>
         <CodeDisplay css={styles} html={ReactDOMServer.renderToString(html)} />
         <div className='w-full p-1 border border-gray-200 border-t-0 bg-gray-100 rounded-b-xl'></div>
