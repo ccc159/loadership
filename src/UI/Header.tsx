@@ -6,7 +6,7 @@ export const Header = () => {
         <div className='relative flex items-center justify-between'>
           <div className='flex-shrink-0'>
             <Link to='/' className='flex rounded outline-none'>
-              <img className='w-auto h-8' src='/logo.svg' alt='' /> Loadership
+              <img className='w-auto h-8 md:h-10' src='/loadership_logo_text.svg' alt='' />
             </Link>
           </div>
 
