@@ -7,7 +7,7 @@ import { Checkbox } from '../components/Checkbox';
 import { generateShortID, getReverseColor } from '../utils';
 import { Field } from '../components/Field';
 
-export const LoaderDotLinearComponent = () => {
+export const LoaderDotLinearComponent: React.FC<{ preview?: boolean }> = ({ preview = false }) => {
   const [backgroundColor, setBackgroundColor] = useState<string>('#d1d5db');
   const [showFrame, setShowFrame] = useState<boolean>(false);
 
@@ -108,6 +108,15 @@ export const LoaderDotLinearComponent = () => {
         ))}
     </div>
   );
+
+  if (preview) {
+    return (
+      <>
+        <style>{styles}</style>
+        <div>{html}</div>
+      </>
+    );
+  }
 
   return (
     <>
