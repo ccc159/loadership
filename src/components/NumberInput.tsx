@@ -1,73 +1,144 @@
 import { useEffect, useState } from 'react';
 
-export const NumberInput: React.FC<{ label: string; value: number; onChange?: (v: number) => void; placeholder?: string; min?: number; max?: number }> = ({
-  label,
-  value,
-  onChange,
-  placeholder,
-  min,
-  max,
-}) => {
-  const [temp, setTemp] = useState<number | undefined>(value);
+export const NumberInput: React.FC<{
+  label: string;
+  value: number;
+  onChange?: (v: number) => void;
+  placeholder?: string;
+  min?: number;
+  max?: number;
+  unit?: string;
+  step?: number;
+  disabled?: boolean;
+}> = ({ label, value, onChange, placeholder, min, max, unit, step = 1, disabled = false }) => {
+  const [temp, setTemp] = useState<string>('');
 
   useEffect(() => {
-    setTemp(value);
+    updateTemp(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
-  function onInput(input: string) {
-    const parsed = parseInt(input);
-    if (parsed === undefined || isNaN(parsed)) setTemp(undefined);
-    else if (min && parsed < min) onChange?.(min);
-    else if (max && parsed > max) onChange?.(max);
-    else onChange?.(parsed);
+  function updateTemp(newValue?: number) {
+    // if value is undefined, set temp to empty string
+    if (newValue === undefined) setTemp('');
+    // if newValue has more than 2 decimal places, round it to 2 decimal places
+    else if (newValue.toString().split('.')[1]?.length > 2) setTemp(newValue.toFixed(2));
+    else setTemp(newValue.toString());
+  }
+
+  function onInput(e: React.ChangeEvent<HTMLInputElement>) {
+    // allow only numbers and one decimal point
+    const val = e.target.value;
+    if (val.match(/^[0-9]*\.?[0-9]*$/)) setTemp(val);
+  }
+
+  function onSliderChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const val = parseFloat(e.target.value);
+    onChange?.(val);
+    updateTemp(val);
   }
 
   function onBlur() {
-    setTemp(value);
+    commit();
+  }
+
+  function commit() {
+    // parse temp to number
+    const tempNum = parseFloat(temp);
+    // if temp is NaN, set it to value
+    if (isNaN(tempNum)) updateTemp(value);
+    else if (min && tempNum < min) {
+      onChange?.(min);
+      updateTemp(min);
+    } else if (max && tempNum > max) {
+      onChange?.(max);
+      updateTemp(max);
+    } else {
+      const newValue = tempNum - (tempNum % step);
+      onChange?.(newValue);
+      updateTemp(newValue);
+    }
   }
 
   function increment() {
+    if (disabled) return;
     if (value === undefined) return;
     if (max && value >= max) return;
-    onChange?.(value + 1);
+    onChange?.(value + step);
   }
 
   function decrement() {
+    if (disabled) return;
     if (value === undefined) return;
     if (min && value <= min) return;
-    onChange?.(value - 1);
+    onChange?.(value - step);
   }
 
   return (
-    <div className='flex flex-col w-full items-start'>
-      <label className='block mb-2 text-sm font-medium text-gray-900'>{label}:</label>
-      <div className='relative flex items-center mb-2 w-full md:max-w-sm'>
-        <button onClick={decrement} type='button' className='bg-gray-100  hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none'>
-          <svg className='w-3 h-3 text-gray-900' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 18 2'>
-            <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M1 1h16' />
-          </svg>
-        </button>
-        <input
-          type='text'
-          className='bg-gray-50 border-x-0 border border-gray-300 h-11 font-medium text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pb-6'
-          placeholder={placeholder}
-          onChange={(e) => onInput(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && onBlur()}
-          onBlur={onBlur}
-          value={temp}
-          required
-        />
-        <div className='absolute bottom-1 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 flex items-center text-xs text-gray-400 space-x-1 rtl:space-x-reverse'>
-          {min && <span>{min} &le;</span>}
-          <span>{label}</span>
-          {max && <span>&le; {max}</span>}
-        </div>
-        <button type='button' onClick={increment} className='bg-gray-100  hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none'>
-          <svg className='w-3 h-3 text-gray-900 ' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 18 18'>
-            <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M9 1v16M1 9h16' />
-          </svg>
-        </button>
+    <div className='relative flex items-center mb-2 w-full md:max-w-sm '>
+      <button
+        disabled={disabled}
+        onClick={decrement}
+        type='button'
+        className='bg-gray-100  hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none disabled:bg-gray-300'
+      >
+        <svg className='w-3 h-3 text-gray-900' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 18 2'>
+          <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M1 1h16' />
+        </svg>
+      </button>
+      <input
+        disabled={disabled}
+        type='text'
+        step={step}
+        className='bg-gray-50 border-x-0 border border-gray-300 h-11 font-medium text-center text-gray-900 text-sm focus:ring-gray-500 focus:border-gray-500 block w-full pb-6 disabled:bg-gray-200'
+        placeholder={placeholder}
+        onChange={onInput}
+        onKeyDown={(e) => e.key === 'Enter' && onBlur()}
+        onBlur={onBlur}
+        value={temp}
+        required
+      />
+      <div className='absolute bottom-1 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 flex items-center text-xs text-gray-400 space-x-1 rtl:space-x-reverse'>
+        {min !== undefined && max !== undefined ? (
+          <span className='flex gap-1 '>
+            <span className='pr-1 whitespace-nowrap'>
+              {label}
+              {unit && ` (${unit})`}
+            </span>
+            {min}
+            <input
+              onChange={onSliderChange}
+              disabled={disabled}
+              type='range'
+              value={temp}
+              min={min}
+              max={max}
+              step={step}
+              className='w-full h-1 translate-y-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer disabled:bg-gray-300'
+            ></input>
+            {max}
+          </span>
+        ) : (
+          <span>
+            <span className='pr-1 whitespace-nowrap'>
+              {label}
+              {unit && ` (${unit})`}
+            </span>
+            {min !== undefined && <span>&ge; {min}</span>}
+            {max !== undefined && <span>&le; {max}</span>}
+          </span>
+        )}
       </div>
+      <button
+        disabled={disabled}
+        type='button'
+        onClick={increment}
+        className='bg-gray-100  hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none disabled:bg-gray-300'
+      >
+        <svg className='w-3 h-3 text-gray-900 ' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 18 18'>
+          <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M9 1v16M1 9h16' />
+        </svg>
+      </button>
     </div>
   );
 };
