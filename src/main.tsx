@@ -14,9 +14,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path='/' errorElement={<ErrorPage />} element={<App />} />
+        <Route path='/' element={<App />} />
         <Route path='/license' element={<LicensePage />} />
         <Route path='/loaderdotlinear' element={<LoaderDotLinearComponent />} />
+        <Route path='*' element={<ErrorPage />} />
       </Routes>
       <NotificationComponent />
     </BrowserRouter>
