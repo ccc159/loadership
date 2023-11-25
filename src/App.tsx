@@ -3,6 +3,7 @@ import { Header } from './UI/Header';
 import { LoaderGrid } from './UI/LoaderGrid';
 import { NumberInput } from './components/NumberInput';
 import { ColorInput } from './components/ColorInput';
+import { NotificationComponent } from './components/Notification';
 
 function App() {
   const [value, setValue] = React.useState<number>(2);

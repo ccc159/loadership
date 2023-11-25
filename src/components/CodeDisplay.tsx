@@ -4,6 +4,7 @@ import * as prettier from 'prettier';
 import htmlPlugin from 'prettier/plugins/html';
 import cssPlugin from 'prettier/plugins/postcss';
 import { useEffect, useState } from 'react';
+import { Notification } from './Notification';
 
 export const CodeDisplay: React.FC<{ html: string; css: string }> = ({ html, css }) => {
   const [tab, setTab] = useState<'html' | 'css'>('html');
@@ -21,6 +22,7 @@ export const CodeDisplay: React.FC<{ html: string; css: string }> = ({ html, css
 
   function copyToClipboard() {
     navigator.clipboard.writeText(tab === 'html' ? html : css);
+    Notification.show('Copied to clipboard!');
   }
 
   return (
