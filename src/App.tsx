@@ -1,13 +1,9 @@
-import React from 'react';
-import { Header } from './UI/Header';
+import { useRef } from 'react';
 import { LoaderGrid } from './UI/LoaderGrid';
-import { NumberInput } from './components/NumberInput';
-import { ColorInput } from './components/ColorInput';
-import { NotificationComponent } from './components/Notification';
 
 function App() {
-  const [value, setValue] = React.useState<number>(2);
-  const [color, setColor] = React.useState<string>('#FF44EC');
+  const gridRef = useRef<HTMLDivElement>(null);
+
   return (
     <section className='relative py-12 sm:py-16 lg:pt-20 xl:pb-0'>
       <div className='relative px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl'>
@@ -27,14 +23,15 @@ function App() {
               title=''
               className='relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
               role='button'
+              onClick={() => gridRef.current?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Get started with 4,958 configurators
+              Get started
             </a>
           </div>
         </div>
       </div>
 
-      <div className='mt-16 md:mt-20'>
+      <div ref={gridRef} className='mt-16 md:mt-20'>
         <LoaderGrid />
       </div>
     </section>
