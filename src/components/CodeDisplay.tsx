@@ -24,7 +24,7 @@ export const CodeDisplay: React.FC<{ html: string; css: string }> = ({ html, css
   }
 
   return (
-    <div className='relative border-gray-200 border-y border-x bg-gray-50'>
+    <div className='relative border-gray-200 border-y border-x bg-gray-50 flex-grow'>
       <div className='grid w-full grid-cols-2 border-b border-gray-200 bg-gray-50 rounded-t-md'>
         <ul className='flex text-sm font-medium text-center text-gray-500'>
           <TabTitle title='html' />
