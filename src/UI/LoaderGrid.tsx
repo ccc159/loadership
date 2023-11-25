@@ -1,4 +1,4 @@
-import { LoaderCircularDot } from '../loaders/LoaderCircularDot';
+import { LoaderDotLinearComponent } from '../loaders/LoaderDotLinear';
 import { LoaderPreview } from './LoaderPreview';
 
 export const LoaderGrid = () => {
@@ -11,11 +11,11 @@ export const LoaderGrid = () => {
         </div>
 
         <div className='grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-5 mt-10 lg:mt-16 lg:gap-6 lg:grid-cols-4'>
-          <LoaderPreview loader={<LoaderCircularDot />} name={'Circular Dot'} />
-          <LoaderPreview loader={<LoaderCircularDot />} name={'Circular Dot'} />
-          <LoaderPreview loader={<LoaderCircularDot />} name={'Circular Dot'} />
-          <LoaderPreview loader={<LoaderCircularDot />} name={'Circular Dot'} />
-          <LoaderPreview loader={<LoaderCircularDot />} name={'Circular Dot'} />
+          <LoaderPreview loader={<LoaderDotLinearComponent />} name={'Circular Dot'} />
+          <LoaderPreview loader={<LoaderDotLinearComponent />} name={'Circular Dot'} />
+          <LoaderPreview loader={<LoaderDotLinearComponent />} name={'Circular Dot'} />
+          <LoaderPreview loader={<LoaderDotLinearComponent />} name={'Circular Dot'} />
+          <LoaderPreview loader={<LoaderDotLinearComponent />} name={'Circular Dot'} />
         </div>
       </div>
     </section>

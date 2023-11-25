@@ -5,7 +5,7 @@ import { ErrorPage } from './ErrorPage.tsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import { LicensePage } from './LicensePage.tsx';
-import { LoaderCircularDot } from './loaders/LoaderCircularDot.tsx';
+import { LoaderDotLinearComponent } from './loaders/LoaderDotLinear.tsx';
 import { Header } from './UI/Header.tsx';
 import { NotificationComponent } from './components/Notification.tsx';
 
@@ -16,7 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path='/' errorElement={<ErrorPage />} element={<App />} />
         <Route path='/license' element={<LicensePage />} />
-        <Route path='/loader1' element={<LoaderCircularDot />} />
+        <Route path='/loaderdotlinear' element={<LoaderDotLinearComponent />} />
       </Routes>
       <NotificationComponent />
     </BrowserRouter>
