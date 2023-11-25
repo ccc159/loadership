@@ -17,6 +17,7 @@ export const LoaderDotLinearComponent: React.FC<{ preview?: boolean }> = ({ prev
   const [loaderHeight, setLoaderHeight] = useState(100);
   const [dotSize, setDotSize] = useState(13);
   const [dotDistance, setDotDistance] = useState(24);
+  const [dotColor, setDotColor] = useState<string>('#ffffff');
   const [speed, setSpeed] = useState(0.6);
 
   const [loaderVersion, setLoaderVersion] = useState('');
@@ -61,7 +62,7 @@ export const LoaderDotLinearComponent: React.FC<{ preview?: boolean }> = ({ prev
       width: ${dotSize}px;
       height: ${dotSize}px;
       border-radius: 50%;
-      background: white;
+      background: ${dotColor};
       animation-timing-function: cubic-bezier(0, 1, 1, 0);
       }
       .loadership_${loaderVersion} div:nth-child(1) {
@@ -133,6 +134,7 @@ export const LoaderDotLinearComponent: React.FC<{ preview?: boolean }> = ({ prev
             <NumberInput label='Number of dots' value={numDots} onChange={setNumDots} />
             <NumberInput label='Dot size' value={dotSize} onChange={setDotSize} unit='px' />
             <NumberInput label='Dot distance' value={dotDistance} onChange={setDotDistance} unit='px' />
+            <ColorInput label='Dot color' value={dotColor} onChange={setDotColor} />
           </Field>
           <Field label={'Speed'}>
             <NumberInput step={0.05} label='Speed' value={speed} onChange={setSpeed} min={0} max={2} unit='s' />
