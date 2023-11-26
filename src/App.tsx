@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 import { LoaderGrid } from './UI/LoaderGrid';
+import { Steps } from './UI/Steps';
+import { Features } from './UI/Features';
 
 function App() {
   const gridRef = useRef<HTMLDivElement>(null);
@@ -30,6 +32,9 @@ function App() {
           </div>
         </div>
       </div>
+
+      <Features />
+      <Steps />
 
       <div ref={gridRef} className='mt-16 md:mt-20'>
         <LoaderGrid />
