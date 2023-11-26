@@ -1,4 +1,4 @@
-import { LoaderDotLinear } from '../loaders/LoaderDotLinear';
+import { Loaders } from '../loaders/Loaders';
 import { LoaderPreview } from './LoaderPreview';
 
 export const LoaderGrid = () => {
@@ -11,7 +11,9 @@ export const LoaderGrid = () => {
         </div>
 
         <div className='grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-5 mt-10 lg:mt-16 lg:gap-6 lg:grid-cols-4'>
-          <LoaderPreview loader={LoaderDotLinear} />
+          {Loaders.map((loader) => {
+            return <LoaderPreview key={loader.slug} loader={loader} />;
+          })}
         </div>
       </div>
     </section>

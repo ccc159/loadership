@@ -2,15 +2,16 @@ import { Configurator } from '../UI/Configurator';
 import { generateShortID } from '../utils';
 import { LoaderClass } from './Loader';
 
-export class LoaderDotLinearClass extends LoaderClass {
+export class LoaderDotCircularRegularClass extends LoaderClass {
   public params: {
     autoLoaderSize: boolean;
     loaderWidth: number;
     loaderHeight: number;
     loaderVersion: string;
+    loaderRadius: number;
     dotNum: number;
     dotSize: number;
-    dotDistance: number;
+    dotScale: number;
     dotColor: string;
     speed: number;
   };
@@ -22,14 +23,22 @@ export class LoaderDotLinearClass extends LoaderClass {
       loaderWidth: 0,
       loaderHeight: 0,
       loaderVersion: generateShortID(),
-      dotNum: 3,
-      dotSize: 13,
-      dotDistance: 24,
+      loaderRadius: 30,
+      dotNum: 12,
+      dotSize: 8,
+      dotScale: 1.5,
       dotColor: '#ffffff',
-      speed: 0.6,
+      speed: 1.2,
     };
     this.controls = {
       ...this.controls,
+      loaderRadius: {
+        name: 'Loader radius',
+        type: 'number',
+        group: 'Loader',
+        forceUpdate: true,
+        affectLoaderSize: true,
+      },
       dotNum: {
         name: 'Number of dots',
         type: 'number',
@@ -44,11 +53,13 @@ export class LoaderDotLinearClass extends LoaderClass {
         unit: 'px',
         affectLoaderSize: true,
       },
-      dotDistance: {
-        name: 'Dot distance',
+      dotScale: {
+        name: 'Dot scale',
         type: 'number',
         group: 'Dot',
-        unit: 'px',
+        min: 1,
+        max: 10,
+        step: 0.01,
         affectLoaderSize: true,
       },
       dotColor: {
@@ -69,17 +80,17 @@ export class LoaderDotLinearClass extends LoaderClass {
   }
 
   public override get PerfectWidth(): number {
-    return this.params.dotDistance * (this.params.dotNum - 1) + this.params.dotSize;
+    return this.params.loaderRadius * 2 + this.params.dotSize * this.params.dotScale;
   }
 
   public override get PerfectHeight(): number {
-    return this.params.dotSize;
+    return this.params.loaderRadius * 2 + this.params.dotSize * this.params.dotScale;
   }
 
   public override get HTML(): JSX.Element {
     return (
       <div className={`loadership_${this.params.loaderVersion}`}>
-        {Array(this.params.dotNum + 1)
+        {Array(this.params.dotNum)
           .fill(0)
           .map((_, i) => (
             <div key={i}></div>
@@ -89,14 +100,15 @@ export class LoaderDotLinearClass extends LoaderClass {
   }
 
   public override get CSS(): string {
-    const tempStyles = Array(this.params.dotNum - 1)
+    const tempStyles = Array(this.params.dotNum)
       .fill(0)
       .map(
         (_, i) =>
-          `.loadership_${this.params.loaderVersion} div:nth-child(${i + 2}) {
-              left: ${(this.params.loaderWidth - this.PerfectWidth) / 2 + i * this.params.dotDistance}px;
-              animation: loadership_${this.params.loaderVersion}_translate ${this.params.speed}s infinite;
-          }`
+          `.loadership_${this.params.loaderVersion} div:nth-child(${i + 1}) {
+              animation-delay: ${((-this.params.speed / this.params.dotNum) * i).toFixed(2)}s;
+              top: ${Math.round(this.params.loaderRadius * Math.cos((2 * Math.PI * i) / this.params.dotNum) + this.PerfectHeight / 2 - this.params.dotSize / 2)}px;
+              left: ${Math.round(this.params.loaderRadius * Math.sin((2 * Math.PI * i) / this.params.dotNum) + this.PerfectWidth / 2 - this.params.dotSize / 2)}px;
+            }`
       )
       .join('\n');
 
@@ -109,57 +121,35 @@ export class LoaderDotLinearClass extends LoaderClass {
         }
         .loadership_${this.params.loaderVersion} div {
         position: absolute;
-        top: ${(this.params.loaderHeight - this.PerfectHeight) / 2}px;
         width: ${this.params.dotSize}px;
         height: ${this.params.dotSize}px;
         border-radius: 50%;
         background: ${this.params.dotColor};
-        animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        animation: loadership_${this.params.loaderVersion}_scale ${this.params.speed}s linear infinite;
         }
-        .loadership_${this.params.loaderVersion} div:nth-child(1) {
-          left: ${(this.params.loaderWidth - this.PerfectWidth) / 2}px;
-          animation: loadership_${this.params.loaderVersion}_scale_up ${this.params.speed}s infinite;
-        }
+        
         ${tempStyles}
-        .loadership_${this.params.loaderVersion} div:nth-child(${this.params.dotNum + 1}) {
-          left: ${(this.params.loaderWidth - this.PerfectWidth) / 2 + (this.params.dotNum - 1) * this.params.dotDistance}px;
-          animation: loadership_${this.params.loaderVersion}_scale_down ${this.params.speed}s infinite;
-        }
-        @keyframes loadership_${this.params.loaderVersion}_scale_up {
-          0% {
-              transform: scale(0);
-          }
-          100% {
-              transform: scale(1);
-          }
-        }
-        @keyframes loadership_${this.params.loaderVersion}_scale_down {
-        0% {
+     
+        @keyframes loadership_${this.params.loaderVersion}_scale {
+          0%, 20%, 80%, 100% {
             transform: scale(1);
+          }
+          50% {
+            transform: scale(${this.params.dotScale});
+          }
         }
-        100% {
-            transform: scale(0);
-        }
-        }
-        @keyframes loadership_${this.params.loaderVersion}_translate {
-        0% {
-            transform: translate(0, 0);
-        }
-        100% {
-            transform: translate(${this.params.dotDistance}px, 0);
-        }
-    }
+    
     `;
     return styles;
   }
 }
 
-const loader = new LoaderDotLinearClass();
-const name = 'Loader Dot Linear';
+const loader = new LoaderDotCircularRegularClass();
+const name = 'Loader Dot Circular Regular';
 
-export const LoaderDotLinear: ILoader = {
+export const LoaderDotCircularRegular: ILoader = {
   name,
-  slug: 'loader_dot_linear',
+  slug: 'loader_dot_circular_regular',
   date: new Date('2023/11/22'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,

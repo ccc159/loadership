@@ -5,7 +5,7 @@ export const LoaderPreview: React.FC<{ loader: ILoader }> = ({ loader }) => {
   const isNew = (new Date().getTime() - loader.date.getTime()) / (1000 * 3600 * 24) < 30;
 
   return (
-    <Link to={`/${loader.slug}`}>
+    <Link to={`/loaders/${loader.slug}`}>
       <div className='relative group cursor-pointer'>
         <div className='overflow-hidden aspect-w-1 aspect-h-1 bg-zinc-200 rounded-xl'>
           <div className='object-cover w-full aspect-square transition-all duration-300 group-hover:scale-150 flex items-center justify-center content-center'>{loader.preview}</div>

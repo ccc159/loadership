@@ -8,7 +8,7 @@ import { getReverseColor } from '../utils';
 import { Field } from '../components/Field';
 import { LoaderClass } from '../loaders/Loader';
 
-export const Configurator: React.FC<{ preview?: boolean; loader: LoaderClass }> = ({ preview = false, loader }) => {
+export const Configurator: React.FC<{ preview?: boolean; loader: LoaderClass; name?: string }> = ({ preview = false, loader, name }) => {
   const [backgroundColor, setBackgroundColor] = useState<string>('#d1d5db');
   const [showFrame, setShowFrame] = useState<boolean>(false);
 
@@ -58,54 +58,58 @@ export const Configurator: React.FC<{ preview?: boolean; loader: LoaderClass }> 
       <style>{loader.CSS}</style>
       <section className='px-6 py-12 m-auto bg-white md:px-12 lg:px-16 max-w-7xl grid grid-rows-2 grid-cols-1 md:grid-rows-1 md:grid-cols-2 items-center'>
         <section className='flex flex-col gap-6 w-full h-full border border-gray-200 bg-gray-100 rounded-t-xl md:rounded-s-xl md:border-r-0 md:rounded-none p-4'>
-          <h2 className='text-2xl font-bold'>Loader Dot Linear</h2>
+          <h2 className='text-2xl font-bold'>{name}</h2>
           {groups.map((group) => {
+            const relaventControls: IConfiguratorControl = {};
+            Object.keys(controls).forEach((c) => {
+              const item = controls[c];
+              if (item.group === group) relaventControls[c] = item;
+            });
             return (
-              <>
-                <Field label={group}>
-                  {Object.keys(controls).map((c) => {
-                    const item = controls[c];
-                    if (item.group !== group) return;
-                    if (item.type === 'number') {
-                      return (
-                        <NumberInput
-                          label={item.name}
-                          value={params[c] as number}
-                          onChange={(v) => {
-                            updateParamValue(c, v);
-                          }}
-                          unit={item.unit}
-                          min={item.min}
-                          max={item.max}
-                          step={item.step}
-                        />
-                      );
-                    }
-                    if (item.type === 'color') {
-                      return (
-                        <ColorInput
-                          label={item.name}
-                          value={params[c] as string}
-                          onChange={(v) => {
-                            updateParamValue(c, v);
-                          }}
-                        />
-                      );
-                    }
-                    if (item.type === 'boolean') {
-                      return (
-                        <Checkbox
-                          label={item.name}
-                          value={params[c] as boolean}
-                          onCheck={(v) => {
-                            updateParamValue(c, v);
-                          }}
-                        />
-                      );
-                    }
-                  })}
-                </Field>
-              </>
+              <Field key={group} label={group}>
+                {Object.keys(relaventControls).map((c) => {
+                  const item = relaventControls[c];
+                  if (item.type === 'number') {
+                    return (
+                      <NumberInput
+                        key={c}
+                        label={item.name}
+                        value={params[c] as number}
+                        onChange={(v) => {
+                          updateParamValue(c, v);
+                        }}
+                        unit={item.unit}
+                        min={item.min}
+                        max={item.max}
+                        step={item.step}
+                      />
+                    );
+                  }
+                  if (item.type === 'color') {
+                    return (
+                      <ColorInput
+                        key={c}
+                        label={item.name}
+                        value={params[c] as string}
+                        onChange={(v) => {
+                          updateParamValue(c, v);
+                        }}
+                      />
+                    );
+                  }
+                  if (item.type === 'boolean') {
+                    return (
+                      <Checkbox
+                        label={item.name}
+                        value={params[c] as boolean}
+                        onCheck={(v) => {
+                          updateParamValue(c, v);
+                        }}
+                      />
+                    );
+                  }
+                })}
+              </Field>
             );
           })}
         </section>

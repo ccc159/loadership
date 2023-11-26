@@ -8,7 +8,7 @@ import { AboutPage } from './AboutPage.tsx';
 import { Header } from './UI/Header.tsx';
 import { NotificationComponent } from './components/Notification.tsx';
 import { Analytics } from '@vercel/analytics/react';
-import { LoaderDotLinear } from './loaders/LoaderDotLinear.tsx';
+import { Loaders } from './loaders/Loaders.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -17,7 +17,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path='/' element={<App />} />
         <Route path='/about' element={<AboutPage />} />
-        <Route path='/loaderdotlinear' element={LoaderDotLinear.component} />
+        {Loaders.map((loader) => (
+          <Route key={loader.slug} path={'/loaders/' + loader.slug} element={loader.component} />
+        ))}
         <Route path='*' element={<ErrorPage />} />
       </Routes>
       <NotificationComponent />
