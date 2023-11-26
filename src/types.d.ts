@@ -3,4 +3,23 @@ interface ILoader {
   slug: string;
   description?: string;
   component: React.ReactNode;
+  preview: React.ReactNode;
+}
+
+interface IConfiguratorControl {
+  [key: string]: {
+    name: string;
+    type: 'number' | 'color' | 'boolean';
+    group: string;
+    min?: number;
+    max?: number;
+    step?: number;
+    unit?: string;
+    forceUpdate?: boolean;
+    affectLoaderSize?: boolean;
+  };
+}
+
+interface IConfiguratorParam {
+  [key: string]: number | string | boolean;
 }

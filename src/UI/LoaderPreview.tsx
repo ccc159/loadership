@@ -5,7 +5,7 @@ export const LoaderPreview: React.FC<{ loader: ILoader; isNew?: boolean }> = ({ 
     <Link to={`/${loader.slug}`}>
       <div className='relative group cursor-pointer'>
         <div className='overflow-hidden aspect-w-1 aspect-h-1 bg-zinc-200 rounded-xl'>
-          <div className='object-cover w-full aspect-square transition-all duration-300 group-hover:scale-150 flex items-center justify-center content-center'>{loader.component}</div>
+          <div className='object-cover w-full aspect-square transition-all duration-300 group-hover:scale-150 flex items-center justify-center content-center'>{loader.preview}</div>
         </div>
         {isNew && (
           <div className='absolute left-3 top-3'>

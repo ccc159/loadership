@@ -1,4 +1,4 @@
-import { LoaderDotLinear } from '../loaders/LoaderDotLinear.meta';
+import { LoaderDotLinear } from '../loaders/LoaderDotLinear';
 import { LoaderPreview } from './LoaderPreview';
 
 export const LoaderGrid = () => {
