@@ -45,7 +45,7 @@ export const Header = () => {
           </div> */}
 
           <div className='hidden lg:flex lg:items-center lg:justify-center lg:space-x-10'>
-            <MenuItem title='License' href='/license' />
+            <MenuItem title='License' href='/about#license' />
             <MenuItem title='About' href='/about' />
           </div>
         </div>
