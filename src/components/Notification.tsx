@@ -1,12 +1,12 @@
 export const NotificationComponent = () => {
   return (
-    <div id='notification' className='flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800' role='alert'>
+    <div id='notification' className='flex items-center max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800' role='alert'>
       <style>
         {`
             #notification {
             visibility: hidden; /* Hidden by default. Visible on click */
-            min-width: 250px; /* Set a default minimum width */
-            margin-left: -125px; /* Divide value of min-width by 2 */
+            min-width: 200px; /* Set a default minimum width */
+            margin-left: -100px; /* Divide value of min-width by 2 */
             text-align: center; /* Centered text */
             position: fixed; /* Sit on top of the screen */
             z-index: 1; /* Add a z-index if needed */
