@@ -145,7 +145,7 @@ export const LoaderDotLinearComponent: React.FC<{ preview?: boolean }> = ({ prev
             <Checkbox label='Show frame' value={showFrame} onCheck={setShowFrame} minimal />
             <ColorInput minimal label='Background color' value={backgroundColor} onChange={setBackgroundColor} />
           </div>
-          <div style={{ backgroundColor }} className='flex justify-center items-center min-h-[300px] p-4 border-gray-200 bg-gradient-to-r border-x'>
+          <div style={{ backgroundColor }} className='flex justify-center items-center min-h-[300px] max-h-[500px] p-4 border-gray-200 bg-gradient-to-r border-x overflow-auto'>
             <div style={{ border: showFrame ? `solid 1px ${getReverseColor(backgroundColor)}` : 'none' }}>{html}</div>
           </div>
           <CodeDisplay css={styles} html={ReactDOMServer.renderToString(html)} />
