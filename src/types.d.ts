@@ -1,6 +1,7 @@
 interface ILoader {
   name: string;
   slug: string;
+  date: Date;
   description?: string;
   component: React.ReactNode;
   preview: React.ReactNode;

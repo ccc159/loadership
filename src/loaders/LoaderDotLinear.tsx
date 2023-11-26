@@ -159,6 +159,7 @@ const loader = new LoaderDotLinearClass();
 export const LoaderDotLinear: ILoader = {
   name: 'Loader Dot Linear',
   slug: 'loaderdotlinear',
+  date: new Date('2023/11/22'),
   component: <Configurator loader={loader} />,
   preview: <Configurator loader={loader} preview />,
 };

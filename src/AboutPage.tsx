@@ -20,26 +20,7 @@ export const AboutPage = () => {
 
           <div className='ml-6'>
             <h3 className='mt-12 text-xl font-bold text-gray-900'>Credits</h3>
-            <ul className='mt-4 text-base font-normal leading-7 text-gray-600 list-disc list-inside'>
-              <li>
-                <a href='https://loading.io/css/' target='_blank' className='text-[#827398]'>
-                  loading.io
-                </a>{' '}
-                Some of the loaders are based on the work of loading.io.
-              </li>
-              <li>
-                <a href='https://flowbite.com/' target='_blank' className='text-[#827398]'>
-                  flowbite
-                </a>{' '}
-                The UI controls are based on the work of Flowbite.
-              </li>
-              <li>
-                <a href='https://www.landingfolio.com/' target='_blank' className='text-[#827398]'>
-                  landingfolio
-                </a>{' '}
-                The landing page is inspired by Landingfolio.
-              </li>
-            </ul>
+            The UI controls are based on the work of <em>Flowbite</em>. The landing page is inspired by <em>Landingfolio</em>. Some of the loaders are based on the work of <em>loading.io</em>.
           </div>
         </div>
         <h1 id='license' className='text-3xl font-extrabold text-gray-900 sm:text-4xl mt-12'>
