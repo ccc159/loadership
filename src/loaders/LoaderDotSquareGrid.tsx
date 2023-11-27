@@ -170,7 +170,7 @@ export class LoaderDotSquareGridClass extends LoaderClass {
 }
 
 const loader = new LoaderDotSquareGridClass();
-const name = 'Loader Dot Circular grid';
+const name = 'Loader Dot Circular Grid';
 
 export const LoaderDotSquareGrid: ILoader = {
   name,
