@@ -2,13 +2,14 @@ import { Configurator } from '../UI/Configurator';
 import { generateShortID } from '../utils';
 import { LoaderClass } from './Loader';
 
-export class LoaderDotCircularRegularClass extends LoaderClass {
+export class LoaderDotCircularFadeClass extends LoaderClass {
   public params: {
     autoLoaderSize: boolean;
     loaderWidth: number;
     loaderHeight: number;
     loaderVersion: string;
     loaderRadius: number;
+    fadeRange: number;
     dotNum: number;
     dotSize: number;
     dotScale: number;
@@ -24,9 +25,10 @@ export class LoaderDotCircularRegularClass extends LoaderClass {
       loaderHeight: 0,
       loaderVersion: generateShortID(),
       loaderRadius: 30,
-      dotNum: 12,
-      dotSize: 8,
-      dotScale: 1.5,
+      fadeRange: 0.15,
+      dotNum: 10,
+      dotSize: 10,
+      dotScale: 1,
       dotColor: '#ffffff',
       speed: 1.2,
     };
@@ -37,6 +39,15 @@ export class LoaderDotCircularRegularClass extends LoaderClass {
         type: 'number',
         group: 'Loader',
         forceUpdate: true,
+        affectLoaderSize: true,
+      },
+      fadeRange: {
+        name: 'Fade range',
+        type: 'number',
+        group: 'Loader',
+        min: 0,
+        max: 0.49,
+        step: 0.01,
         affectLoaderSize: true,
       },
       dotNum: {
@@ -68,12 +79,12 @@ export class LoaderDotCircularRegularClass extends LoaderClass {
         group: 'Dot',
       },
       speed: {
-        name: 'Speed',
+        name: 'Rotate speed',
         type: 'number',
         group: 'Speed',
         min: 0,
         max: 2,
-        step: 0.05,
+        step: 0.01,
         unit: 's',
       },
     };
@@ -112,44 +123,48 @@ export class LoaderDotCircularRegularClass extends LoaderClass {
       )
       .join('\n');
 
+    const facdAnimation = `
+      @keyframes loadership_${this.params.loaderVersion}_fade {
+        0%, ${this.params.fadeRange * 100}%, ${(1 - this.params.fadeRange) * 100}%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }    
+    `;
+
     const styles = `
-    .loadership_${this.params.loaderVersion} {
-        display: flex;
-        position: relative;
-        width: ${this.params.loaderWidth}px;
-        height: ${this.params.loaderHeight}px;
+        .loadership_${this.params.loaderVersion} {
+          display: flex;
+          position: relative;
+          width: ${this.params.loaderWidth}px;
+          height: ${this.params.loaderHeight}px;
         }
         .loadership_${this.params.loaderVersion} div {
-        position: absolute;
-        width: ${this.params.dotSize}px;
-        height: ${this.params.dotSize}px;
-        border-radius: 50%;
-        background: ${this.params.dotColor};
-        animation: loadership_${this.params.loaderVersion}_scale ${this.params.speed}s linear infinite;
+          position: absolute;
+          width: ${this.params.dotSize}px;
+          height: ${this.params.dotSize}px;
+          border-radius: 50%;
+          background: ${this.params.dotColor};
+          animation: loadership_${this.params.loaderVersion}_fade ${this.params.speed}s linear infinite;
         }
         
         ${tempStyles}
      
-        @keyframes loadership_${this.params.loaderVersion}_scale {
-          0%, 20%, 80%, 100% {
-            transform: scale(1);
-          }
-          50% {
-            transform: scale(${this.params.dotScale});
-          }
-        }
+        ${facdAnimation}
     
     `;
     return styles;
   }
 }
 
-const loader = new LoaderDotCircularRegularClass();
-const name = 'Loader Dot Circular Regular';
+const loader = new LoaderDotCircularFadeClass();
+const name = 'Loader Dot Circular Fade';
 
-export const LoaderDotCircularRegular: ILoader = {
+export const LoaderDotCircularFade: ILoader = {
   name,
-  slug: 'loader_dot_circular_regular',
+  slug: 'loader_dot_circular_fade',
   date: new Date('2023/11/22'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,
