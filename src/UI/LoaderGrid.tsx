@@ -3,7 +3,7 @@ import { LoaderPreview } from './LoaderPreview';
 
 export const LoaderGrid = () => {
   return (
-    <section className='px-12 py-12 bg-white sm:px-6 sm:py-14 lg:px-20 lg:py-14'>
+    <section className='px-4 py-6 md:p-12 bg-white lg:px-20 lg:py-14'>
       <div className='px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl'>
         <div className='max-w-md mx-auto text-center'>
           <h2 className='text-2xl font-bold text-gray-900 sm:text-3xl'>Choose a loader to configure</h2>

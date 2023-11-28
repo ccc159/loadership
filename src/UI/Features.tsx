@@ -23,7 +23,7 @@ export const Features = () => {
             </p>
           </div>
 
-          <div className='md:p-8 lg:p-14 md:border-l md:border-gray-200'>
+          <div className='md:p-8 lg:p-14 md:border-l md:border-mp'>
             <img width={44} className='mx-auto' src={no_login} alt='' />
             <h3 className='mt-12 text-xl font-bold text-gray-900 font-pj'>No login required</h3>
             <p className='mt-5 text-base text-gray-600 font-pj'>
@@ -32,13 +32,13 @@ export const Features = () => {
             </p>
           </div>
 
-          <div className='md:p-8 lg:p-14 md:border-l md:border-gray-200'>
+          <div className='md:p-8 lg:p-14 md:border-l md:border-mp'>
             <img width={44} className='mx-auto' src={no_dependencies} alt='' />
             <h3 className='mt-12 text-xl font-bold text-gray-900 font-pj'>No dependencies</h3>
             <p className='mt-5 text-base text-gray-600 font-pj'>Generate CSS-only loaders that can be easily incorporated into your projects without any additional dependencies.</p>
           </div>
 
-          <div className='md:p-8 lg:p-14 md:border-t md:border-gray-200'>
+          <div className='md:p-8 lg:p-14 md:border-t md:border-mp'>
             <img width={44} className='mx-auto' src={customize} alt='' />
             <h3 className='mt-12 text-xl font-bold text-gray-900 font-pj'>Customizable loaders</h3>
             <p className='mt-5 text-base text-gray-600 font-pj'>
@@ -47,7 +47,7 @@ export const Features = () => {
             </p>
           </div>
 
-          <div className='md:p-8 lg:p-14 md:border-l md:border-gray-200 md:border-t'>
+          <div className='md:p-8 lg:p-14 md:border-l md:border-mp md:border-t'>
             <img width={44} className='mx-auto' src={free} alt='' />
             <h3 className='mt-12 text-xl font-bold text-gray-900 font-pj'>Completely free</h3>
             <p className='mt-5 text-base text-gray-600 font-pj'>
@@ -55,7 +55,7 @@ export const Features = () => {
             </p>
           </div>
 
-          <div className='md:p-8 lg:p-14 md:border-l md:border-gray-200 md:border-t'>
+          <div className='md:p-8 lg:p-14 md:border-l md:border-mp md:border-t'>
             <img width={44} className='mx-auto' src={instant} alt='' />
             <h3 className='mt-12 text-xl font-bold text-gray-900 font-pj'>Realtime preview</h3>
             <p className='mt-5 text-base text-gray-600 font-pj'>

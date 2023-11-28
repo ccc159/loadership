@@ -145,7 +145,7 @@ const name = 'Loader Stripe Circular Classic';
 export const LoaderStripeCircularClassic: ILoader = {
   name,
   slug: 'loader_stripe_circular_classic',
-  date: new Date('2023/11/26'),
+  date: new Date('2023/11/28'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,
 };

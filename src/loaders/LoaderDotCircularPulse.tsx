@@ -170,7 +170,7 @@ const name = 'Loader Dot Circular Pulse';
 export const LoaderDotCircularPulse: ILoader = {
   name,
   slug: 'loader_dot_circular_pulse',
-  date: new Date('2023/11/26'),
+  date: new Date('2023/11/16'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,
 };

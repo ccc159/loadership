@@ -14,7 +14,7 @@ export const Steps = () => {
 
           <div className='relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12'>
             <div>
-              <div className='flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow'>
+              <div className='flex items-center justify-center w-16 h-16 mx-auto bg-lp border-2 border-dp rounded-full shadow'>
                 <span className='text-xl font-semibold text-gray-700'> 1 </span>
               </div>
               <h3 className='mt-6 text-xl font-semibold leading-tight text-black md:mt-10'>Choose a loader</h3>
@@ -22,7 +22,7 @@ export const Steps = () => {
             </div>
 
             <div>
-              <div className='flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow'>
+              <div className='flex items-center justify-center w-16 h-16 mx-auto bg-lp border-2 border-dp rounded-full shadow'>
                 <span className='text-xl font-semibold text-gray-700'> 2 </span>
               </div>
               <h3 className='mt-6 text-xl font-semibold leading-tight text-black md:mt-10'>Configure the loader</h3>
@@ -30,7 +30,7 @@ export const Steps = () => {
             </div>
 
             <div>
-              <div className='flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow'>
+              <div className='flex items-center justify-center w-16 h-16 mx-auto bg-lp border-2 border-dp rounded-full shadow'>
                 <span className='text-xl font-semibold text-gray-700'> 3 </span>
               </div>
               <h3 className='mt-6 text-xl font-semibold leading-tight text-black md:mt-10'>Copy & Paste</h3>

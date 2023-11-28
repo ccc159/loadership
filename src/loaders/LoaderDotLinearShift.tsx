@@ -160,7 +160,7 @@ const name = 'Loader Dot Linear Shift';
 export const LoaderDotLinearShift: ILoader = {
   name,
   slug: 'loader_dot_linear_shift',
-  date: new Date('2023/11/22'),
+  date: new Date('2023/11/10'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,
 };
