@@ -2,7 +2,7 @@ import { Configurator } from '../UI/Configurator';
 import { generateShortID } from '../utils';
 import { LoaderClass } from './Loader';
 
-export class LoaderDotLinearClass extends LoaderClass {
+export class LoaderDotLinearShiftClass extends LoaderClass {
   public params: {
     autoLoaderSize: boolean;
     loaderWidth: number;
@@ -154,12 +154,12 @@ export class LoaderDotLinearClass extends LoaderClass {
   }
 }
 
-const loader = new LoaderDotLinearClass();
-const name = 'Loader Dot Linear';
+const loader = new LoaderDotLinearShiftClass();
+const name = 'Loader Dot Linear Shift';
 
-export const LoaderDotLinear: ILoader = {
+export const LoaderDotLinearShift: ILoader = {
   name,
-  slug: 'loader_dot_linear',
+  slug: 'loader_dot_linear_shift',
   date: new Date('2023/11/22'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,
