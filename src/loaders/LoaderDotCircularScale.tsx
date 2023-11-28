@@ -12,6 +12,7 @@ export class LoaderDotCircularScaleClass extends LoaderClass {
     dotNum: number;
     dotSize: number;
     dotScale: number;
+    dotOpacity: number;
     dotColor: string;
     speed: number;
   };
@@ -27,6 +28,7 @@ export class LoaderDotCircularScaleClass extends LoaderClass {
       dotNum: 12,
       dotSize: 8,
       dotScale: 1.5,
+      dotOpacity: 0.8,
       dotColor: '#ffffff',
       speed: 1.2,
     };
@@ -61,6 +63,14 @@ export class LoaderDotCircularScaleClass extends LoaderClass {
         max: 10,
         step: 0.01,
         affectLoaderSize: true,
+      },
+      dotOpacity: {
+        name: 'Dot opacity',
+        type: 'number',
+        group: 'Dot',
+        min: 0,
+        max: 1,
+        step: 0.01,
       },
       dotColor: {
         name: 'Dot color',
@@ -125,7 +135,7 @@ export class LoaderDotCircularScaleClass extends LoaderClass {
         height: ${this.params.dotSize}px;
         border-radius: 50%;
         background: ${this.params.dotColor};
-        animation: loadership_${this.params.loaderVersion}_scale ${this.params.speed}s linear infinite;
+        animation: loadership_${this.params.loaderVersion}_scale ${this.params.speed}s linear infinite, loadership_${this.params.loaderVersion}_fade ${this.params.speed}s linear infinite;
         }
         
         ${tempStyles}
@@ -138,6 +148,14 @@ export class LoaderDotCircularScaleClass extends LoaderClass {
             transform: scale(${this.params.dotScale});
           }
         }
+
+        @keyframes loadership_${this.params.loaderVersion}_fade {
+          0%, 20%, 80%, 100% {
+            opacity: ${this.params.dotOpacity};
+          }
+          50% {
+            opacity: 1;
+          }
     
     `;
     return styles;
