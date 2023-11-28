@@ -2,7 +2,7 @@ import { Configurator } from '../UI/Configurator';
 import { generateShortID } from '../utils';
 import { LoaderClass } from './Loader';
 
-export class LoaderDotLinearBounceClass extends LoaderClass {
+export class LoaderDotLinearWaveClass extends LoaderClass {
   public params: {
     autoLoaderSize: boolean;
     loaderWidth: number;
@@ -14,7 +14,6 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
     dotColor: string;
     bounceHeight: number;
     speed: number;
-    pause: number;
   };
 
   constructor() {
@@ -24,13 +23,12 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
       loaderWidth: 0,
       loaderHeight: 0,
       loaderVersion: generateShortID(),
-      dotNum: 4,
-      dotSize: 13,
-      dotDistance: 20,
+      dotNum: 8,
+      dotSize: 9,
+      dotDistance: 11,
       dotColor: '#ffffff',
-      bounceHeight: 40,
-      speed: 1.6,
-      pause: 0.8,
+      bounceHeight: 36,
+      speed: 1.2,
     };
     this.controls = {
       ...this.controls,
@@ -61,7 +59,7 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
         group: 'Dot',
       },
       bounceHeight: {
-        name: 'Bounce height',
+        name: 'Wave height',
         type: 'number',
         group: 'Dot',
         unit: 'px',
@@ -71,17 +69,9 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
         type: 'number',
         group: 'Speed',
         min: 0,
-        max: 10,
+        max: 3,
         step: 0.01,
         unit: 's',
-      },
-      pause: {
-        name: 'Pause time',
-        type: 'number',
-        group: 'Speed',
-        min: 0,
-        max: 5,
-        step: 0.01,
       },
     };
   }
@@ -118,8 +108,6 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
       )
       .join('\n');
 
-    const actualAnimationPercent = this.params.speed / (this.params.speed + this.params.pause);
-
     const styles = `
         .loadership_${this.params.loaderVersion} {
           display: flex;
@@ -130,29 +118,24 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
 
         .loadership_${this.params.loaderVersion} div {
           position: absolute;
-          top: ${(this.params.loaderHeight - this.PerfectHeight) / 2 + this.params.bounceHeight}px;
+          top: ${(this.params.loaderHeight - this.PerfectHeight) / 2}px;
           width: ${this.params.dotSize}px;
           height: ${this.params.dotSize}px;
           border-radius: 50%;
           background: ${this.params.dotColor};
-          animation: loadership_${this.params.loaderVersion}_bounce ${this.params.speed + this.params.pause}s infinite;
-          animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+          animation: loadership_${this.params.loaderVersion}_wave alternate ${this.params.speed}s infinite;
+          animation-timing-function: cubic-bezier(.56,-0.01,.48,1);
         }
 
         ${tempStyles}
 
 
-        @keyframes loadership_${this.params.loaderVersion}_bounce {
-          0%, ${20 * actualAnimationPercent}%, ${50 * actualAnimationPercent}%, ${80 * actualAnimationPercent}%, ${100 * actualAnimationPercent}%, 100% {
-            transform: translateY(0);
+        @keyframes loadership_${this.params.loaderVersion}_wave {
+          0%, 100% { 
+            transform: translatey(0px);
           }
-        
-          ${40 * actualAnimationPercent}% {
-            transform: translateY(-${this.params.bounceHeight}px);
-          }
-        
-          ${60 * actualAnimationPercent}% {
-            transform: translateY(-${0.4 * this.params.bounceHeight}px);
+          50% { 
+            transform: translatey(${this.params.bounceHeight}px);
           }
         }
     `;
@@ -160,12 +143,12 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
   }
 }
 
-const loader = new LoaderDotLinearBounceClass();
-const name = 'Loader Dot Linear Bounce';
+const loader = new LoaderDotLinearWaveClass();
+const name = 'Loader Dot Linear Wave';
 
-export const LoaderDotLinearBounce: ILoader = {
+export const LoaderDotLinearWave: ILoader = {
   name,
-  slug: 'loader_dot_linear_bounce',
+  slug: 'loader_dot_linear_wave',
   date: new Date('2023/11/22'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,
