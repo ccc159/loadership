@@ -27,3 +27,9 @@ export const generateShortID = () => {
   }
   return id;
 };
+
+// convert opacity 0-1 to hex two digit
+export const convertOpacityToHex = (opacity: number) => {
+  const hex = Math.round(opacity * 255).toString(16);
+  return hex.length === 1 ? '0' + hex : hex;
+};
