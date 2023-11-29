@@ -7,9 +7,11 @@ import { LoaderDotLinearWave } from './LoaderDotLinearWave';
 import { LoaderStripeCircularClassic } from './LoaderStripeCircularClassic';
 import { LoaderStripeCircularDual } from './LoaderStripeCircularDual';
 import { LoaderStripeCircularPulse } from './LoaderStripeCircularPulse';
+import { LoaderDotLinearMotionBlur } from './LoaderDotLinearMotionBlur';
 
 export const Loaders = [
   LoaderDotLinearShift,
+  LoaderDotLinearMotionBlur,
   LoaderDotCircularScale,
   LoaderDotCircularPulse,
   LoaderDotSquareGrid,
