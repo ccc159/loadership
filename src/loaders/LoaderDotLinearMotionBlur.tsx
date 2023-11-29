@@ -10,6 +10,8 @@ export class LoaderDotLinearMotionBlurClass extends LoaderClass {
     loaderVersion: string;
     dotSize: number;
     dotDistance: number;
+    trailOpacity: number;
+    trailScale: number;
     blurInterval: number;
     dotColor: string;
     speed: number;
@@ -25,6 +27,8 @@ export class LoaderDotLinearMotionBlurClass extends LoaderClass {
       loaderVersion: generateShortID(),
       dotSize: 16,
       dotDistance: 80,
+      trailOpacity: 0.3,
+      trailScale: 0.25,
       blurInterval: 12,
       dotColor: '#ffffff',
       speed: 1.2,
@@ -46,7 +50,22 @@ export class LoaderDotLinearMotionBlurClass extends LoaderClass {
         unit: 'px',
         affectLoaderSize: true,
       },
-
+      trailOpacity: {
+        name: 'Trail opacity',
+        type: 'number',
+        group: 'Dot',
+        min: 0,
+        max: 1,
+        step: 0.01,
+      },
+      trailScale: {
+        name: 'Trail scale',
+        type: 'number',
+        group: 'Dot',
+        min: 0,
+        max: 1,
+        step: 0.01,
+      },
       dotColor: {
         name: 'Dot color',
         type: 'color',
@@ -100,8 +119,10 @@ export class LoaderDotLinearMotionBlurClass extends LoaderClass {
         (_, i) =>
           `.loadership_${this.params.loaderVersion} div:nth-child(${i + 2}) {
             animation-delay: ${(i + 1) * this.params.blurInterval}ms;
-            opacity: ${(0.3 - (0.3 / this.params.dotNum) * i).toFixed(2)};
-            transform: scale(${(0.5 - (0.5 / this.params.dotNum) * i + 0.5).toFixed(2)});
+            opacity: ${(this.params.trailOpacity - (this.params.trailOpacity / this.params.dotNum) * i).toFixed(2)};
+            width: ${this.params.dotSize * (1 - (i * this.params.trailScale) / this.params.dotNum)}px;
+            height: ${this.params.dotSize * (1 - (i * this.params.trailScale) / this.params.dotNum)}px;
+            top: ${((this.params.loaderHeight - this.PerfectHeight) / 2 + (this.params.dotSize - this.params.dotSize * (1 - (i * this.params.trailScale) / this.params.dotNum)) / 2).toFixed(2)}px;
           }`
       )
       .join('\n');
