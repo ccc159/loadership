@@ -39,7 +39,9 @@ export const Bezier: React.FC<{ value: string; onChange?: (v: string) => void }>
       </select>
       {isBezier && (
         <div className='relative flex flex-col items-center max-w-sm mt-2 p-2 gap-1'>
-          <BezierCurveEditor size={150} outerAreaSize={0} value={numbers} onChange={onBezierChange} />
+          <div style={{ touchAction: 'none' }}>
+            <BezierCurveEditor size={150} outerAreaSize={0} value={numbers} onChange={onBezierChange} />
+          </div>
           <label className='whitespace-nowrap bg-gray-200 px-3 rounded-sm flex items-center text-xs text-gray-400 font-medium '>{value}</label>
         </div>
       )}
