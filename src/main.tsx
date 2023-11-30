@@ -10,6 +10,7 @@ import { NotificationComponent } from './components/Notification.tsx';
 import { Analytics } from '@vercel/analytics/react';
 import { Loaders } from './loaders/Loaders.tsx';
 import { ScrollToTop } from './components/ScrollToTop.tsx';
+import { Footer } from './UI/Footer.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       </Routes>
       <NotificationComponent />
       <Analytics />
+      <Footer />
     </BrowserRouter>
   </React.StrictMode>
 );

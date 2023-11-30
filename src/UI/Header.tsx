@@ -12,10 +12,7 @@ const MenuItem: React.FC<{ title: string; href: string; important?: boolean }> =
     );
 
   return (
-    <Link
-      className='text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2'
-      to={href}
-    >
+    <Link className='text-base font-medium text-dp transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-dp focus:ring-offset-2' to={href}>
       {title}
     </Link>
   );
@@ -28,24 +25,23 @@ export const Header = () => {
         <div className='relative flex items-center justify-between'>
           <div className='flex-shrink-0'>
             <Link to='/' className='flex rounded outline-none'>
-              <img className='w-auto h-10 md:h-16' src='/loadership_logo_text.svg' alt='' />
+              <img className='w-auto h-10 md:h-16' src='/loadership_logo_text.svg' alt='Loadership' />
             </Link>
           </div>
 
-          <div className='flex lg:hidden'>
+          {/* <div className='flex lg:hidden'>
             <button type='button' className='text-gray-900'>
               <svg className='w-7 h-7' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='1.5' d='M4 6h16M4 12h16M4 18h16'></path>
               </svg>
             </button>
-          </div>
+          </div> */}
 
           {/* <div className='hidden lg:absolute lg:inset-y-0 lg:flex lg:items-center lg:justify-center lg:space-x-12 lg:-translate-x-1/2 lg:left-1/2'>
             <MenuItem title='License' href='/license' />
           </div> */}
 
           <div className='hidden lg:flex lg:items-center lg:justify-center lg:space-x-10'>
-            <MenuItem title='License' href='/about#license' />
             <MenuItem title='About' href='/about' />
           </div>
         </div>
