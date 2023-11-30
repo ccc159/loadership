@@ -15,6 +15,7 @@ export class LoaderDotCircularScaleClass extends LoaderClass {
     dotOpacity: number;
     dotColor: string;
     speed: number;
+    bezier: string;
   };
 
   constructor() {
@@ -31,6 +32,7 @@ export class LoaderDotCircularScaleClass extends LoaderClass {
       dotOpacity: 0.8,
       dotColor: '#ffffff',
       speed: 1.2,
+      bezier: 'linear',
     };
     this.controls = {
       ...this.controls,
@@ -135,7 +137,8 @@ export class LoaderDotCircularScaleClass extends LoaderClass {
         height: ${this.params.dotSize}px;
         border-radius: 50%;
         background: ${this.params.dotColor};
-        animation: loadership_${this.params.loaderVersion}_scale ${this.params.speed}s linear infinite, loadership_${this.params.loaderVersion}_fade ${this.params.speed}s linear infinite;
+        animation: loadership_${this.params.loaderVersion}_scale ${this.params.speed}s infinite, loadership_${this.params.loaderVersion}_fade ${this.params.speed}s infinite;
+        animation-timing-function: ${this.params.bezier};
         }
         
         ${tempStyles}

@@ -15,6 +15,7 @@ export class LoaderStripeLinearBounceClass extends LoaderClass {
     stripeColor: string;
     stripeOpacity: number;
     speed: number;
+    bezier: string;
   };
 
   constructor() {
@@ -31,6 +32,7 @@ export class LoaderStripeLinearBounceClass extends LoaderClass {
       stripeColor: '#ffffff',
       stripeOpacity: 0.3,
       speed: 1,
+      bezier: 'cubic-bezier(0.5, 0, 0.5, 1)',
     };
     this.controls = {
       ...this.controls,
@@ -83,6 +85,11 @@ export class LoaderStripeLinearBounceClass extends LoaderClass {
         max: 5,
         step: 0.01,
       },
+      bezier: {
+        name: 'Bezier',
+        type: 'bezier',
+        group: 'Animation',
+      },
     };
   }
 
@@ -128,7 +135,7 @@ export class LoaderStripeLinearBounceClass extends LoaderClass {
         .loadership_${this.params.loaderVersion} div:nth-child(2) {
           width: ${this.params.stripeLength}px;
           animation: loadership_${this.params.loaderVersion}_move alternate ${this.params.speed}s infinite;
-          animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+          animation-timing-function: ${this.params.bezier};
         }
 
         @keyframes loadership_${this.params.loaderVersion}_move {

@@ -15,6 +15,7 @@ export class LoaderDotCircularPulseClass extends LoaderClass {
     dotColor: string;
     speed: number;
     stackRate: number;
+    bezier: string;
   };
 
   constructor() {
@@ -31,6 +32,7 @@ export class LoaderDotCircularPulseClass extends LoaderClass {
       dotColor: '#ffffff',
       speed: 1.2,
       stackRate: 9 / 25,
+      bezier: 'cubic-bezier(0.5, 0, 0.5, 1)',
     };
     this.controls = {
       ...this.controls,
@@ -86,6 +88,11 @@ export class LoaderDotCircularPulseClass extends LoaderClass {
         max: 1,
         step: 0.01,
       },
+      bezier: {
+        name: 'Bezier',
+        type: 'bezier',
+        group: 'Animation',
+      },
     };
   }
 
@@ -135,7 +142,8 @@ export class LoaderDotCircularPulseClass extends LoaderClass {
         }
 
         .loadership_${this.params.loaderVersion} div {
-          animation: loadership_${this.params.loaderVersion}_roller ${this.params.speed}s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+          animation: loadership_${this.params.loaderVersion}_roller ${this.params.speed}s infinite;
+          animation-timing-function: ${this.params.bezier};
           transform-origin: ${this.params.loaderWidth / 2}px ${this.params.loaderWidth / 2}px;
         }
         .loadership_${this.params.loaderVersion} div:after {

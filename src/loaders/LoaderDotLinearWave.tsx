@@ -14,6 +14,7 @@ export class LoaderDotLinearWaveClass extends LoaderClass {
     dotColor: string;
     bounceHeight: number;
     speed: number;
+    bezier: string;
   };
 
   constructor() {
@@ -29,6 +30,7 @@ export class LoaderDotLinearWaveClass extends LoaderClass {
       dotColor: '#ffffff',
       bounceHeight: 36,
       speed: 1.2,
+      bezier: 'cubic-bezier(.56,-0.01,.48,1)',
     };
     this.controls = {
       ...this.controls,
@@ -72,6 +74,11 @@ export class LoaderDotLinearWaveClass extends LoaderClass {
         max: 3,
         step: 0.01,
         unit: 's',
+      },
+      bezier: {
+        name: 'Bezier',
+        type: 'bezier',
+        group: 'Animation',
       },
     };
   }
@@ -124,7 +131,7 @@ export class LoaderDotLinearWaveClass extends LoaderClass {
           border-radius: 50%;
           background: ${this.params.dotColor};
           animation: loadership_${this.params.loaderVersion}_wave alternate ${this.params.speed}s infinite;
-          animation-timing-function: cubic-bezier(.56,-0.01,.48,1);
+          animation-timing-function: ${this.params.bezier};
         }
 
         ${tempStyles}

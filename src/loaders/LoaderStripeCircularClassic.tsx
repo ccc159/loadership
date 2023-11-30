@@ -14,6 +14,7 @@ export class LoaderStripeCircularClassicClass extends LoaderClass {
     stripeBackgroundOpacity: number;
     stripeColor: string;
     speed: number;
+    bezier: string;
   };
 
   constructor() {
@@ -29,6 +30,7 @@ export class LoaderStripeCircularClassicClass extends LoaderClass {
       stripeBackgroundOpacity: 0.2,
       stripeColor: '#ffffff',
       speed: 1.2,
+      bezier: 'linear',
     };
     this.controls = {
       ...this.controls,
@@ -75,6 +77,11 @@ export class LoaderStripeCircularClassicClass extends LoaderClass {
         max: 5,
         step: 0.05,
         unit: 's',
+      },
+      bezier: {
+        name: 'Bezier',
+        type: 'bezier',
+        group: 'Animation',
       },
     };
   }
@@ -126,7 +133,8 @@ export class LoaderStripeCircularClassicClass extends LoaderClass {
           border: ${this.params.stripeWidth}px solid ${this.params.stripeColor};
           border-radius: 50%;
           clip-path: ${clipPath};
-          animation: loadership_${this.params.loaderVersion}_spin ${this.params.speed}s linear infinite;
+          animation: loadership_${this.params.loaderVersion}_spin ${this.params.speed}s infinite;
+          animation-timing-function: ${this.params.bezier};
         }
 
         @keyframes loadership_${this.params.loaderVersion}_spin {

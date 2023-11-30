@@ -15,6 +15,7 @@ export class LoaderDotLinearMotionBlurClass extends LoaderClass {
     blurInterval: number;
     dotColor: string;
     speed: number;
+    bezier: string;
     dotNum: number;
   };
 
@@ -32,6 +33,7 @@ export class LoaderDotLinearMotionBlurClass extends LoaderClass {
       blurInterval: 12,
       dotColor: '#ffffff',
       speed: 1.2,
+      bezier: 'cubic-bezier(0.43, 0.03, 0.53, 0.93)',
       dotNum: 20,
     };
     this.controls = {
@@ -89,6 +91,11 @@ export class LoaderDotLinearMotionBlurClass extends LoaderClass {
         max: 50,
         step: 1,
       },
+      bezier: {
+        name: 'Bezier',
+        type: 'bezier',
+        group: 'Animation',
+      },
     };
   }
 
@@ -143,7 +150,7 @@ export class LoaderDotLinearMotionBlurClass extends LoaderClass {
           border-radius: 50%;
           background: ${this.params.dotColor};
           animation: loadership_${this.params.loaderVersion}_move alternate ${this.params.speed}s infinite;
-          animation-timing-function: cubic-bezier(.54,-0.13,.53,1.07);
+          animation-timing-function: ${this.params.bezier};
         }
 
         ${tempStyles}

@@ -10,7 +10,7 @@ interface ILoader {
 interface IConfiguratorControl {
   [key: string]: {
     name: string;
-    type: 'number' | 'color' | 'boolean';
+    type: 'number' | 'color' | 'boolean' | 'bezier';
     group: string;
     min?: number;
     max?: number;

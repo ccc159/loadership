@@ -7,6 +7,7 @@ import { Checkbox } from '../components/Checkbox';
 import { getReverseColor } from '../utils';
 import { Field } from '../components/Field';
 import { LoaderClass } from '../loaders/Loader';
+import { Bezier } from '../components/Bezier';
 
 export const Configurator: React.FC<{ preview?: boolean; loader: LoaderClass; name?: string }> = ({ preview = false, loader, name }) => {
   const [backgroundColor, setBackgroundColor] = useState<string>('#d1d5db');
@@ -100,9 +101,21 @@ export const Configurator: React.FC<{ preview?: boolean; loader: LoaderClass; na
                   if (item.type === 'boolean') {
                     return (
                       <Checkbox
+                        key={c}
                         label={item.name}
                         value={params[c] as boolean}
                         onCheck={(v) => {
+                          updateParamValue(c, v);
+                        }}
+                      />
+                    );
+                  }
+                  if (item.type === 'bezier') {
+                    return (
+                      <Bezier
+                        key={c}
+                        value={params[c] as string}
+                        onChange={(v: string) => {
                           updateParamValue(c, v);
                         }}
                       />

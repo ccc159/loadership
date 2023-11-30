@@ -13,6 +13,7 @@ export class LoaderDotLinearShiftClass extends LoaderClass {
     dotDistance: number;
     dotColor: string;
     speed: number;
+    bezier: string;
   };
 
   constructor() {
@@ -27,6 +28,7 @@ export class LoaderDotLinearShiftClass extends LoaderClass {
       dotDistance: 24,
       dotColor: '#ffffff',
       speed: 0.6,
+      bezier: 'cubic-bezier(0, 1, 1, 0)',
     };
     this.controls = {
       ...this.controls,
@@ -114,7 +116,7 @@ export class LoaderDotLinearShiftClass extends LoaderClass {
         height: ${this.params.dotSize}px;
         border-radius: 50%;
         background: ${this.params.dotColor};
-        animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        animation-timing-function: ${this.params.bezier};
         }
         .loadership_${this.params.loaderVersion} div:nth-child(1) {
           left: ${(this.params.loaderWidth - this.PerfectWidth) / 2}px;

@@ -14,6 +14,7 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
     dotColor: string;
     bounceHeight: number;
     speed: number;
+    bezier: string;
     pause: number;
   };
 
@@ -30,6 +31,7 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
       dotColor: '#ffffff',
       bounceHeight: 40,
       speed: 1.6,
+      bezier: 'linear',
       pause: 0.8,
     };
     this.controls = {
@@ -74,6 +76,11 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
         max: 10,
         step: 0.01,
         unit: 's',
+      },
+      bezier: {
+        name: 'Bezier',
+        type: 'bezier',
+        group: 'Animation',
       },
       pause: {
         name: 'Pause time',
@@ -135,8 +142,8 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
           height: ${this.params.dotSize}px;
           border-radius: 50%;
           background: ${this.params.dotColor};
-          animation: loadership_${this.params.loaderVersion}_bounce ${this.params.speed + this.params.pause}s infinite;
-          animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+          animation: loadership_${this.params.loaderVersion}_bounce ${(this.params.speed + this.params.pause).toFixed(2)}s infinite;
+          animation-timing-function: ${this.params.bezier};
         }
 
         ${tempStyles}
