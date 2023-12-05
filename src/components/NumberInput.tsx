@@ -75,7 +75,7 @@ export const NumberInput: React.FC<{
   }
 
   const hasSlider = min !== undefined && max !== undefined;
-  const totalHeight = hasSlider ? 'h-12' : 'h-11';
+  const totalHeight = hasSlider ? 'h-[52px]' : 'h-11';
   const pb = hasSlider ? 'pb-7' : 'pb-6';
 
   return (
