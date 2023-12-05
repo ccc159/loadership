@@ -1,21 +1,22 @@
+import { Line, Point3d, Vector3d } from 'open3d';
 import { Configurator } from '../UI/Configurator';
 import { generateShortID } from '../utils';
 import { LoaderClass } from './Loader';
 
-export class LoaderBlockLinearScaleClass extends LoaderClass {
+export class LoaderBlockGridScaleClass extends LoaderClass {
   public params: {
     paddingX: number;
     paddingY: number;
     loaderVersion: string;
     blockNum: number;
-    blockWidth: number;
-    blockHeight: number;
+    blockSize: number;
     blockScale: number;
     blockOpacity: number;
     blockColor: string;
-    blockDistance: number;
+    blockGap: number;
     speed: number;
     pause: number;
+    animationAngle: number;
     bezier: string;
   };
 
@@ -25,15 +26,15 @@ export class LoaderBlockLinearScaleClass extends LoaderClass {
       paddingX: 0,
       paddingY: 0,
       loaderVersion: generateShortID(),
-      blockNum: 5,
-      blockWidth: 6,
-      blockHeight: 20,
-      blockScale: 3,
+      blockNum: 3,
+      blockSize: 18,
+      blockScale: 0,
       blockOpacity: 1,
-      blockDistance: 10,
+      blockGap: 0,
       blockColor: '#ffffff',
-      speed: 0.8,
-      pause: 1.0,
+      speed: 0.9,
+      pause: 1,
+      animationAngle: 45,
       bezier: 'ease-in-out',
     };
     this.controls = {
@@ -44,42 +45,25 @@ export class LoaderBlockLinearScaleClass extends LoaderClass {
         group: 'Block',
         forceUpdate: true,
         min: 1,
-        max: 50,
-        step: 1,
-      },
-      blockWidth: {
-        name: 'Block width',
-        type: 'number',
-        group: 'Block',
-        unit: 'px',
-        min: 3,
-        max: 50,
-        step: 1,
-      },
-      blockHeight: {
-        name: 'Block height',
-        type: 'number',
-        group: 'Block',
-        unit: 'px',
-        min: 3,
-        max: 50,
-        step: 1,
-      },
-      blockScale: {
-        name: 'Block scale',
-        type: 'number',
-        group: 'Block',
-        min: 1,
         max: 10,
-        step: 0.01,
+        step: 1,
       },
-      blockDistance: {
-        name: 'Block distance',
+      blockSize: {
+        name: 'Block size',
+        type: 'number',
+        group: 'Block',
+        unit: 'px',
+        min: 3,
+        max: 50,
+        step: 1,
+      },
+      blockGap: {
+        name: 'Block gap',
         type: 'number',
         group: 'Block',
         unit: 'px',
         min: 0,
-        max: 500,
+        max: 10,
         step: 1,
       },
       blockOpacity: {
@@ -112,6 +96,15 @@ export class LoaderBlockLinearScaleClass extends LoaderClass {
         max: 5,
         step: 0.01,
       },
+      animationAngle: {
+        name: 'Animation angle',
+        type: 'number',
+        group: 'Animation',
+        unit: 'deg',
+        min: 0,
+        max: 360,
+        step: 1,
+      },
       bezier: {
         name: 'Bezier',
         type: 'bezier',
@@ -121,17 +114,17 @@ export class LoaderBlockLinearScaleClass extends LoaderClass {
   }
 
   public override get width(): number {
-    return this.params.blockWidth + (this.params.blockNum - 1) * this.params.blockDistance + this.params.paddingX * 2;
+    return this.params.blockSize * this.params.blockNum + this.params.blockGap * (this.params.blockNum - 1) + this.params.paddingX * 2;
   }
 
   public override get height(): number {
-    return this.params.blockHeight * this.params.blockScale + this.params.paddingY * 2;
+    return this.params.blockSize * this.params.blockNum + this.params.blockGap * (this.params.blockNum - 1) + this.params.paddingY * 2;
   }
 
   public override get HTML(): JSX.Element {
     return (
       <div className={`loadership_${this.params.loaderVersion}`}>
-        {Array(this.params.blockNum)
+        {Array(this.params.blockNum * this.params.blockNum)
           .fill(0)
           .map((_, i) => (
             <div key={i}></div>
@@ -141,16 +134,33 @@ export class LoaderBlockLinearScaleClass extends LoaderClass {
   }
 
   public override get CSS(): string {
-    const tempStyles = Array(this.params.blockNum)
-      .fill(0)
-      .map(
-        (_, i) =>
-          `.loadership_${this.params.loaderVersion} div:nth-child(${i + 1}) {
-              animation-delay: ${((this.params.speed / this.params.blockNum) * i).toFixed(2)}s;
-              left: ${this.params.paddingX + i * this.params.blockDistance}px;
-            }`
-      )
-      .join('\n');
+    const tempStylesArray: string[] = [];
+    const radian = (this.params.animationAngle * Math.PI) / 180;
+    const origin = new Point3d(0, 0, 0);
+    const p2 = new Point3d(1, Math.tan(radian), 0);
+    const line = new Line(origin, p2).UnitDirection;
+    const maxLength = Math.sqrt(2 * this.params.blockNum * this.params.blockNum);
+
+    for (let i = 0; i < this.params.blockNum; i++) {
+      for (let j = 0; j < this.params.blockNum; j++) {
+        const index = i * this.params.blockNum + j;
+
+        const point = new Vector3d(j, i, 0);
+        const distance = Vector3d.DotProduct(point, line);
+
+        const percent = distance / maxLength;
+
+        tempStylesArray.push(
+          `.loadership_${this.params.loaderVersion} div:nth-child(${index + 1}) {
+            animation-delay: ${(this.params.speed * percent).toFixed(2)}s;
+            top: ${this.params.paddingY + i * this.params.blockSize + (i - 1) * this.params.blockGap}px;
+            left: ${this.params.paddingX + j * this.params.blockSize + (j - 1) * this.params.blockGap}px;
+          }`
+        );
+      }
+    }
+
+    const tempStyles = tempStylesArray.join('\n');
 
     const actualAnimationPercent = this.params.speed / (this.params.speed + this.params.pause);
 
@@ -164,10 +174,9 @@ export class LoaderBlockLinearScaleClass extends LoaderClass {
 
         .loadership_${this.params.loaderVersion} div {
           position: absolute;
-          width: ${this.params.blockWidth}px;
-          height: ${this.params.blockHeight}px;
+          width: ${this.params.blockSize}px;
+          height: ${this.params.blockSize}px;
           background: ${this.params.blockColor};
-          top: ${this.params.paddingY + ((this.params.blockScale - 1) * this.params.blockHeight) / 2}px;
           animation: loadership_${this.params.loaderVersion}_scale ${this.params.speed + this.params.pause}s infinite, loadership_${this.params.loaderVersion}_fade ${
             this.params.speed + this.params.pause
           }s infinite;
@@ -178,19 +187,19 @@ export class LoaderBlockLinearScaleClass extends LoaderClass {
      
         @keyframes loadership_${this.params.loaderVersion}_scale {
           0%, ${actualAnimationPercent * 100}%, 100% {
-            transform: scaleY(1);
+            transform: scale(1);
           }
           ${actualAnimationPercent * 50}% {
-            transform: scaleY(${this.params.blockScale});
+            transform: scale(${this.params.blockScale});
           }
         }
 
         @keyframes loadership_${this.params.loaderVersion}_fade {
           0%, ${actualAnimationPercent * 100}%, 100% {
-            opacity: ${this.params.blockOpacity};
+            opacity: 1;
           }
           ${actualAnimationPercent * 50}% {
-            opacity: 1;
+            opacity: ${this.params.blockOpacity};
           }
         }
     
@@ -199,12 +208,12 @@ export class LoaderBlockLinearScaleClass extends LoaderClass {
   }
 }
 
-const loader = new LoaderBlockLinearScaleClass();
-const name = 'Loader Block Linear Scale';
+const loader = new LoaderBlockGridScaleClass();
+const name = 'Loader Block Grid Scale';
 
-export const LoaderBlockLinearScale: ILoader = {
+export const LoaderBlockGridScale: ILoader = {
   name,
-  slug: 'loader_block_linear_scale',
+  slug: 'loader_block_grid_scale',
   date: new Date('2023/12/05'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,

@@ -10,6 +10,7 @@ import { LoaderStripeCircularPulse } from './LoaderStripeCircularPulse';
 import { LoaderDotLinearMotionBlur } from './LoaderDotLinearMotionBlur';
 import { LoaderStripeLinearBounce } from './LoaderStripeLinearBounce';
 import { LoaderBlockLinearScale } from './LoaderBlockLinearScale';
+import { LoaderBlockGridScale } from './LoaderBlockGridScale';
 
 export const Loaders = [
   LoaderDotLinearShift,
@@ -24,4 +25,5 @@ export const Loaders = [
   LoaderStripeCircularPulse,
   LoaderStripeLinearBounce,
   LoaderBlockLinearScale,
+  LoaderBlockGridScale,
 ];
