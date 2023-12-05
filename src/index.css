@@ -32,3 +32,21 @@ select {
   background-position: right 0.7rem top 50%;
   background-size: 0.65rem auto;
 }
+
+input::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 12px; /* Set a specific slider handle width */
+  height: 12px; /* Slider handle height */
+  background: #827398; /* Green background */
+  border-radius: 50%;
+  cursor: pointer; /* Cursor on hover */
+}
+
+input::-moz-range-thumb {
+  width: 12px; /* Set a specific slider handle width */
+  height: 12px; /* Slider handle height */
+  background: #827398; /* Green background */
+  border-radius: 50%;
+  cursor: pointer; /* Cursor on hover */
+}

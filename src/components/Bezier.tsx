@@ -42,7 +42,7 @@ export const Bezier: React.FC<{ value: string; onChange?: (v: string) => void }>
           <div style={{ touchAction: 'none' }}>
             <BezierCurveEditor size={150} outerAreaSize={0} value={numbers} onChange={onBezierChange} />
           </div>
-          <label className='whitespace-nowrap bg-gray-200 px-3 rounded-sm flex items-center text-xs text-gray-400 font-medium '>{value}</label>
+          <label className='whitespace-nowrap bg-gray-200 px-3 rounded-sm flex items-center text-xs text-gray-400 font-medium'>{value}</label>
         </div>
       )}
     </>
