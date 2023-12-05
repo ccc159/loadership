@@ -10,7 +10,6 @@ export class LoaderDotCircularPulseClass extends LoaderClass {
     loaderRadius: number;
     dotNum: number;
     dotSize: number;
-    dotScale: number;
     dotColor: string;
     speed: number;
     stackRate: number;
@@ -26,7 +25,6 @@ export class LoaderDotCircularPulseClass extends LoaderClass {
       loaderRadius: 30,
       dotNum: 12,
       dotSize: 8,
-      dotScale: 1.5,
       dotColor: '#ffffff',
       speed: 1.2,
       stackRate: 9 / 25,
@@ -38,31 +36,28 @@ export class LoaderDotCircularPulseClass extends LoaderClass {
         name: 'Loader radius',
         type: 'number',
         group: 'Loader',
-        forceUpdate: true,
-        affectLoaderSize: true,
+        unit: 'px',
+        min: 1,
+        max: 100,
+        step: 1,
       },
       dotNum: {
         name: 'Number of dots',
         type: 'number',
         group: 'Dot',
         forceUpdate: true,
-        affectLoaderSize: true,
+        min: 1,
+        max: 50,
+        step: 1,
       },
       dotSize: {
         name: 'Dot size',
         type: 'number',
         group: 'Dot',
         unit: 'px',
-        affectLoaderSize: true,
-      },
-      dotScale: {
-        name: 'Dot scale',
-        type: 'number',
-        group: 'Dot',
-        min: 1,
-        max: 10,
-        step: 0.01,
-        affectLoaderSize: true,
+        min: 3,
+        max: 50,
+        step: 1,
       },
       dotColor: {
         name: 'Dot color',
@@ -74,8 +69,8 @@ export class LoaderDotCircularPulseClass extends LoaderClass {
         type: 'number',
         group: 'Speed',
         min: 0,
-        max: 2,
-        step: 0.05,
+        max: 5,
+        step: 0.01,
         unit: 's',
       },
       stackRate: {
@@ -95,11 +90,11 @@ export class LoaderDotCircularPulseClass extends LoaderClass {
   }
 
   public override get width(): number {
-    return this.params.loaderRadius * 2 + this.params.dotSize * this.params.dotScale + this.params.paddingX * 2;
+    return this.params.loaderRadius * 2 + this.params.dotSize + this.params.paddingX * 2;
   }
 
   public override get height(): number {
-    return this.params.loaderRadius * 2 + this.params.dotSize * this.params.dotScale + this.params.paddingY * 2;
+    return this.params.loaderRadius * 2 + this.params.dotSize + this.params.paddingY * 2;
   }
 
   public override get HTML(): JSX.Element {
