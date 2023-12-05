@@ -4,9 +4,8 @@ import { LoaderClass } from './Loader';
 
 export class LoaderStripeLinearBounceClass extends LoaderClass {
   public params: {
-    autoLoaderSize: boolean;
-    loaderWidth: number;
-    loaderHeight: number;
+    paddingX: number;
+    paddingY: number;
     loaderVersion: string;
     stripeWidth: number;
     stripeLength: number;
@@ -21,9 +20,8 @@ export class LoaderStripeLinearBounceClass extends LoaderClass {
   constructor() {
     super();
     this.params = {
-      autoLoaderSize: true,
-      loaderWidth: 0,
-      loaderHeight: 0,
+      paddingX: 0,
+      paddingY: 0,
       loaderVersion: generateShortID(),
       stripeWidth: 8,
       stripeLength: 40,
@@ -93,12 +91,12 @@ export class LoaderStripeLinearBounceClass extends LoaderClass {
     };
   }
 
-  public override get PerfectWidth(): number {
-    return this.params.totalLength;
+  public override get width(): number {
+    return this.params.totalLength + this.params.paddingX * 2;
   }
 
-  public override get PerfectHeight(): number {
-    return this.params.stripeWidth;
+  public override get height(): number {
+    return this.params.stripeWidth + this.params.paddingY * 2;
   }
 
   public override get HTML(): JSX.Element {
@@ -115,13 +113,14 @@ export class LoaderStripeLinearBounceClass extends LoaderClass {
         .loadership_${this.params.loaderVersion} {
           display: flex;
           position: relative;
-          width: ${this.params.loaderWidth}px;
-          height: ${this.params.loaderHeight}px;
+          width: ${this.width}px;
+          height: ${this.height}px;
         }
 
         .loadership_${this.params.loaderVersion} div {
           position: absolute;
-          top: ${(this.params.loaderHeight - this.PerfectHeight) / 2}px;          
+          top: ${this.params.paddingY}px;          
+          left: ${this.params.paddingX}px;
           height: ${this.params.stripeWidth}px;
           border-radius: ${this.params.stripeRadius}px;
           background: ${this.params.stripeColor};

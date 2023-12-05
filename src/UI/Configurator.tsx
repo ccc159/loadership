@@ -25,23 +25,12 @@ export const Configurator: React.FC<{ preview?: boolean; loader: LoaderClass; na
   const forceUpdateParams = Object.keys(controls)
     .filter((p) => controls[p].forceUpdate)
     .map((p) => params[p]);
-  const affectLoaderSizeParams = Object.keys(controls)
-    .filter((p) => controls[p].affectLoaderSize)
-    .map((p) => params[p]);
 
   useEffect(() => {
     loader.updateVersion();
     setParams({ ...loader.params });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, forceUpdateParams);
-
-  useEffect(() => {
-    if (params.autoLoaderSize) {
-      loader.useAutoSize();
-      setParams({ ...loader.params });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, affectLoaderSizeParams);
 
   if (preview) {
     return (
@@ -132,7 +121,7 @@ export const Configurator: React.FC<{ preview?: boolean; loader: LoaderClass; na
             <ColorInput minimal label='Background color' value={backgroundColor} onChange={setBackgroundColor} />
           </div>
           <div style={{ backgroundColor }} className='flex justify-center items-center min-h-[300px] max-h-[500px] p-4 border-gray-200 bg-gradient-to-r border-x overflow-auto'>
-            <div style={{ border: showFrame ? `solid 1px ${getReverseColor(backgroundColor)}` : 'none' }}>{loader.HTML}</div>
+            <div style={{ border: showFrame ? `dashed 1px ${getReverseColor(backgroundColor)}` : 'none' }}>{loader.HTML}</div>
           </div>
           <CodeDisplay css={loader.CSS} html={ReactDOMServer.renderToString(loader.HTML)} />
           <div className='w-full p-2 border border-gray-200 border-t-0 bg-gray-100 rounded-b-xl md:rounded-br-xl md:rounded-none'></div>

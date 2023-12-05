@@ -4,9 +4,8 @@ import { LoaderClass } from './Loader';
 
 export class LoaderDotCircularScaleClass extends LoaderClass {
   public params: {
-    autoLoaderSize: boolean;
-    loaderWidth: number;
-    loaderHeight: number;
+    paddingX: number;
+    paddingY: number;
     loaderVersion: string;
     loaderRadius: number;
     dotNum: number;
@@ -21,9 +20,8 @@ export class LoaderDotCircularScaleClass extends LoaderClass {
   constructor() {
     super();
     this.params = {
-      autoLoaderSize: true,
-      loaderWidth: 0,
-      loaderHeight: 0,
+      paddingX: 0,
+      paddingY: 0,
       loaderVersion: generateShortID(),
       loaderRadius: 30,
       dotNum: 12,
@@ -91,12 +89,12 @@ export class LoaderDotCircularScaleClass extends LoaderClass {
     };
   }
 
-  public override get PerfectWidth(): number {
-    return this.params.loaderRadius * 2 + this.params.dotSize * this.params.dotScale;
+  public override get width(): number {
+    return this.params.loaderRadius * 2 + this.params.dotSize * this.params.dotScale + this.params.paddingX * 2;
   }
 
-  public override get PerfectHeight(): number {
-    return this.params.loaderRadius * 2 + this.params.dotSize * this.params.dotScale;
+  public override get height(): number {
+    return this.params.loaderRadius * 2 + this.params.dotSize * this.params.dotScale + this.params.paddingY * 2;
   }
 
   public override get HTML(): JSX.Element {
@@ -118,27 +116,28 @@ export class LoaderDotCircularScaleClass extends LoaderClass {
         (_, i) =>
           `.loadership_${this.params.loaderVersion} div:nth-child(${i + 1}) {
               animation-delay: ${((-this.params.speed / this.params.dotNum) * i).toFixed(2)}s;
-              top: ${Math.round(this.params.loaderRadius * Math.cos((2 * Math.PI * i) / this.params.dotNum) + this.PerfectHeight / 2 - this.params.dotSize / 2)}px;
-              left: ${Math.round(this.params.loaderRadius * Math.sin((2 * Math.PI * i) / this.params.dotNum) + this.PerfectWidth / 2 - this.params.dotSize / 2)}px;
+              top: ${Math.round(this.params.loaderRadius * Math.cos((2 * Math.PI * i) / this.params.dotNum) + this.height / 2 - this.params.dotSize / 2)}px;
+              left: ${Math.round(this.params.loaderRadius * Math.sin((2 * Math.PI * i) / this.params.dotNum) + this.width / 2 - this.params.dotSize / 2)}px;
             }`
       )
       .join('\n');
 
     const styles = `
-    .loadership_${this.params.loaderVersion} {
-        display: flex;
-        position: relative;
-        width: ${this.params.loaderWidth}px;
-        height: ${this.params.loaderHeight}px;
+       .loadership_${this.params.loaderVersion} {
+          display: flex;
+          position: relative;
+          width: ${this.width}px;
+          height: ${this.height}px;
         }
+
         .loadership_${this.params.loaderVersion} div {
-        position: absolute;
-        width: ${this.params.dotSize}px;
-        height: ${this.params.dotSize}px;
-        border-radius: 50%;
-        background: ${this.params.dotColor};
-        animation: loadership_${this.params.loaderVersion}_scale ${this.params.speed}s infinite, loadership_${this.params.loaderVersion}_fade ${this.params.speed}s infinite;
-        animation-timing-function: ${this.params.bezier};
+          position: absolute;
+          width: ${this.params.dotSize}px;
+          height: ${this.params.dotSize}px;
+          border-radius: 50%;
+          background: ${this.params.dotColor};
+          animation: loadership_${this.params.loaderVersion}_scale ${this.params.speed}s infinite, loadership_${this.params.loaderVersion}_fade ${this.params.speed}s infinite;
+          animation-timing-function: ${this.params.bezier};
         }
         
         ${tempStyles}

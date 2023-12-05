@@ -4,9 +4,8 @@ import { LoaderClass } from './Loader';
 
 export class LoaderDotLinearShiftClass extends LoaderClass {
   public params: {
-    autoLoaderSize: boolean;
-    loaderWidth: number;
-    loaderHeight: number;
+    paddingX: number;
+    paddingY: number;
     loaderVersion: string;
     dotNum: number;
     dotSize: number;
@@ -19,9 +18,8 @@ export class LoaderDotLinearShiftClass extends LoaderClass {
   constructor() {
     super();
     this.params = {
-      autoLoaderSize: true,
-      loaderWidth: 0,
-      loaderHeight: 0,
+      paddingX: 0,
+      paddingY: 0,
       loaderVersion: generateShortID(),
       dotNum: 3,
       dotSize: 13,
@@ -70,12 +68,12 @@ export class LoaderDotLinearShiftClass extends LoaderClass {
     };
   }
 
-  public override get PerfectWidth(): number {
-    return this.params.dotDistance * (this.params.dotNum - 1) + this.params.dotSize;
+  public override get width(): number {
+    return this.params.dotDistance * (this.params.dotNum - 1) + this.params.dotSize + this.params.paddingX * 2;
   }
 
-  public override get PerfectHeight(): number {
-    return this.params.dotSize;
+  public override get height(): number {
+    return this.params.dotSize + this.params.paddingY * 2;
   }
 
   public override get HTML(): JSX.Element {
@@ -96,35 +94,35 @@ export class LoaderDotLinearShiftClass extends LoaderClass {
       .map(
         (_, i) =>
           `.loadership_${this.params.loaderVersion} div:nth-child(${i + 2}) {
-              left: ${(this.params.loaderWidth - this.PerfectWidth) / 2 + i * this.params.dotDistance}px;
+              left: ${this.params.paddingX + i * this.params.dotDistance}px;
               animation: loadership_${this.params.loaderVersion}_translate ${this.params.speed}s infinite;
           }`
       )
       .join('\n');
 
     const styles = `
-    .loadership_${this.params.loaderVersion} {
-        display: flex;
-        position: relative;
-        width: ${this.params.loaderWidth}px;
-        height: ${this.params.loaderHeight}px;
+        .loadership_${this.params.loaderVersion} {
+          display: flex;
+          position: relative;
+          width: ${this.width}px;
+          height: ${this.height}px;
         }
         .loadership_${this.params.loaderVersion} div {
-        position: absolute;
-        top: ${(this.params.loaderHeight - this.PerfectHeight) / 2}px;
-        width: ${this.params.dotSize}px;
-        height: ${this.params.dotSize}px;
-        border-radius: 50%;
-        background: ${this.params.dotColor};
-        animation-timing-function: ${this.params.bezier};
+          position: absolute;
+          width: ${this.params.dotSize}px;
+          height: ${this.params.dotSize}px;
+          border-radius: 50%;
+          background: ${this.params.dotColor};
+          top: ${this.params.paddingY}px;          
+          animation-timing-function: ${this.params.bezier};
         }
         .loadership_${this.params.loaderVersion} div:nth-child(1) {
-          left: ${(this.params.loaderWidth - this.PerfectWidth) / 2}px;
+          left: ${this.params.paddingX}px;
           animation: loadership_${this.params.loaderVersion}_scale_up ${this.params.speed}s infinite;
         }
         ${tempStyles}
         .loadership_${this.params.loaderVersion} div:nth-child(${this.params.dotNum + 1}) {
-          left: ${(this.params.loaderWidth - this.PerfectWidth) / 2 + (this.params.dotNum - 1) * this.params.dotDistance}px;
+          left: ${this.params.paddingX + (this.params.dotNum - 1) * this.params.dotDistance}px;
           animation: loadership_${this.params.loaderVersion}_scale_down ${this.params.speed}s infinite;
         }
         @keyframes loadership_${this.params.loaderVersion}_scale_up {

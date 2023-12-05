@@ -4,9 +4,8 @@ import { LoaderClass } from './Loader';
 
 export class LoaderStripeCircularClassicClass extends LoaderClass {
   public params: {
-    autoLoaderSize: boolean;
-    loaderWidth: number;
-    loaderHeight: number;
+    paddingX: number;
+    paddingY: number;
     loaderVersion: string;
     loaderRadius: number;
     stripeWidth: number;
@@ -20,9 +19,8 @@ export class LoaderStripeCircularClassicClass extends LoaderClass {
   constructor() {
     super();
     this.params = {
-      autoLoaderSize: true,
-      loaderWidth: 0,
-      loaderHeight: 0,
+      paddingX: 0,
+      paddingY: 0,
       loaderVersion: generateShortID(),
       loaderRadius: 30,
       stripeWidth: 10,
@@ -86,17 +84,18 @@ export class LoaderStripeCircularClassicClass extends LoaderClass {
     };
   }
 
-  public override get PerfectWidth(): number {
-    return this.params.loaderRadius * 2 + this.params.stripeWidth;
+  public override get width(): number {
+    return this.params.loaderRadius * 2 + this.params.stripeWidth + this.params.paddingX * 2;
   }
 
-  public override get PerfectHeight(): number {
-    return this.params.loaderRadius * 2 + this.params.stripeWidth;
+  public override get height(): number {
+    return this.params.loaderRadius * 2 + this.params.stripeWidth + this.params.paddingY * 2;
   }
 
   public override get HTML(): JSX.Element {
     return (
       <div className={`loadership_${this.params.loaderVersion}`}>
+        <div />
         <div />
       </div>
     );
@@ -118,23 +117,25 @@ export class LoaderStripeCircularClassicClass extends LoaderClass {
         .loadership_${this.params.loaderVersion} {
           display: flex;
           position: relative;
-          width: ${this.params.loaderWidth}px;
-          height: ${this.params.loaderHeight}px;
-          border: ${this.params.stripeWidth}px solid ${this.params.stripeColor}${convertOpacityToHex(this.params.stripeBackgroundOpacity)};
-          border-radius: 50%;
+          width: ${this.width}px;
+          height: ${this.height}px;
         }
 
         .loadership_${this.params.loaderVersion} div {
           position: absolute;
-          top: -${this.params.stripeWidth}px;
-          left: -${this.params.stripeWidth}px;
-          width: ${this.params.loaderWidth}px;
-          height: ${this.params.loaderHeight}px;
-          border: ${this.params.stripeWidth}px solid ${this.params.stripeColor};
-          border-radius: 50%;
+          top: ${this.params.paddingY}px;
+          left: ${this.params.paddingX}px;
+          width: ${this.params.loaderRadius * 2 + this.params.stripeWidth}px;
+          height: ${this.params.loaderRadius * 2 + this.params.stripeWidth}px;
+          border: ${this.params.stripeWidth}px solid ${this.params.stripeColor}${convertOpacityToHex(this.params.stripeBackgroundOpacity)};
+          border-radius: 50%;          
+        }
+
+        .loadership_${this.params.loaderVersion} div:nth-child(2) {
           clip-path: ${clipPath};
           animation: loadership_${this.params.loaderVersion}_spin ${this.params.speed}s infinite;
           animation-timing-function: ${this.params.bezier};
+          border: ${this.params.stripeWidth}px solid ${this.params.stripeColor};
         }
 
         @keyframes loadership_${this.params.loaderVersion}_spin {

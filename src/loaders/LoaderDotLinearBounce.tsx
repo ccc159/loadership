@@ -4,9 +4,8 @@ import { LoaderClass } from './Loader';
 
 export class LoaderDotLinearBounceClass extends LoaderClass {
   public params: {
-    autoLoaderSize: boolean;
-    loaderWidth: number;
-    loaderHeight: number;
+    paddingX: number;
+    paddingY: number;
     loaderVersion: string;
     dotNum: number;
     dotSize: number;
@@ -21,9 +20,8 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
   constructor() {
     super();
     this.params = {
-      autoLoaderSize: true,
-      loaderWidth: 0,
-      loaderHeight: 0,
+      paddingX: 0,
+      paddingY: 0,
       loaderVersion: generateShortID(),
       dotNum: 4,
       dotSize: 13,
@@ -93,12 +91,12 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
     };
   }
 
-  public override get PerfectWidth(): number {
-    return this.params.dotDistance * (this.params.dotNum - 1) + this.params.dotSize;
+  public override get width(): number {
+    return this.params.dotDistance * (this.params.dotNum - 1) + this.params.dotSize + this.params.paddingX * 2;
   }
 
-  public override get PerfectHeight(): number {
-    return this.params.dotSize + this.params.bounceHeight;
+  public override get height(): number {
+    return this.params.dotSize + this.params.bounceHeight + this.params.paddingY * 2;
   }
 
   public override get HTML(): JSX.Element {
@@ -120,7 +118,7 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
         (_, i) =>
           `.loadership_${this.params.loaderVersion} div:nth-child(${i + 1}) {
               animation-delay: ${((this.params.speed / this.params.dotNum) * i).toFixed(2)}s;
-              left: ${(this.params.loaderWidth - this.PerfectWidth) / 2 + i * this.params.dotDistance}px;
+              left: ${this.params.paddingX + i * this.params.dotDistance}px;
           }`
       )
       .join('\n');
@@ -131,13 +129,13 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
         .loadership_${this.params.loaderVersion} {
           display: flex;
           position: relative;
-          width: ${this.params.loaderWidth}px;
-          height: ${this.params.loaderHeight}px;
+          width: ${this.width}px;
+          height: ${this.height}px;
         }
 
         .loadership_${this.params.loaderVersion} div {
           position: absolute;
-          top: ${(this.params.loaderHeight - this.PerfectHeight) / 2 + this.params.bounceHeight}px;
+          top: ${this.params.paddingY + this.params.bounceHeight}px;
           width: ${this.params.dotSize}px;
           height: ${this.params.dotSize}px;
           border-radius: 50%;

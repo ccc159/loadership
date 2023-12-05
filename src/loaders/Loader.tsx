@@ -6,41 +6,34 @@ export abstract class LoaderClass {
 
   constructor() {
     this.params = {
-      autoLoaderSize: true,
-      loaderWidth: 0,
-      loaderHeight: 0,
+      paddingX: 0,
+      paddingY: 0,
       loaderVersion: generateShortID(),
     };
     this.controls = {
-      autoLoaderSize: {
-        name: 'Auto size',
-        type: 'boolean',
-        group: 'Loader',
-        affectLoaderSize: true,
-      },
-      loaderWidth: {
-        name: 'Loader width',
+      paddingX: {
+        name: 'Loader padding X',
         type: 'number',
         group: 'Loader',
         unit: 'px',
+        min: 0,
+        max: 100,
       },
-      loaderHeight: {
-        name: 'Loader height',
+      paddingY: {
+        name: 'Loader padding Y',
         type: 'number',
         group: 'Loader',
         unit: 'px',
+        min: 0,
+        max: 100,
       },
     };
   }
-  public abstract get PerfectWidth(): number;
-  public abstract get PerfectHeight(): number;
+  public abstract get width(): number;
+  public abstract get height(): number;
   public abstract get HTML(): JSX.Element;
   public abstract get CSS(): string;
   public updateVersion() {
     this.params.loaderVersion = generateShortID();
-  }
-  public useAutoSize() {
-    this.params.loaderWidth = this.PerfectWidth;
-    this.params.loaderHeight = this.PerfectHeight;
   }
 }

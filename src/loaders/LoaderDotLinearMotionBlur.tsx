@@ -4,9 +4,8 @@ import { LoaderClass } from './Loader';
 
 export class LoaderDotLinearMotionBlurClass extends LoaderClass {
   public params: {
-    autoLoaderSize: boolean;
-    loaderWidth: number;
-    loaderHeight: number;
+    paddingX: number;
+    paddingY: number;
     loaderVersion: string;
     dotSize: number;
     dotDistance: number;
@@ -22,9 +21,8 @@ export class LoaderDotLinearMotionBlurClass extends LoaderClass {
   constructor() {
     super();
     this.params = {
-      autoLoaderSize: true,
-      loaderWidth: 0,
-      loaderHeight: 0,
+      paddingX: 0,
+      paddingY: 0,
       loaderVersion: generateShortID(),
       dotSize: 16,
       dotDistance: 80,
@@ -99,12 +97,12 @@ export class LoaderDotLinearMotionBlurClass extends LoaderClass {
     };
   }
 
-  public override get PerfectWidth(): number {
-    return this.params.dotDistance + this.params.dotSize;
+  public override get width(): number {
+    return this.params.dotDistance + this.params.dotSize + this.params.paddingX * 2;
   }
 
-  public override get PerfectHeight(): number {
-    return this.params.dotSize;
+  public override get height(): number {
+    return this.params.dotSize + this.params.paddingY * 2;
   }
 
   public override get HTML(): JSX.Element {
@@ -129,7 +127,7 @@ export class LoaderDotLinearMotionBlurClass extends LoaderClass {
             opacity: ${(this.params.trailOpacity - (this.params.trailOpacity / this.params.dotNum) * i).toFixed(2)};
             width: ${this.params.dotSize * (1 - (i * this.params.trailScale) / this.params.dotNum)}px;
             height: ${this.params.dotSize * (1 - (i * this.params.trailScale) / this.params.dotNum)}px;
-            top: ${((this.params.loaderHeight - this.PerfectHeight) / 2 + (this.params.dotSize - this.params.dotSize * (1 - (i * this.params.trailScale) / this.params.dotNum)) / 2).toFixed(2)}px;
+            top: ${(this.params.paddingY + (this.params.dotSize - this.params.dotSize * (1 - (i * this.params.trailScale) / this.params.dotNum)) / 2).toFixed(2)}px;
           }`
       )
       .join('\n');
@@ -138,16 +136,16 @@ export class LoaderDotLinearMotionBlurClass extends LoaderClass {
         .loadership_${this.params.loaderVersion} {
           display: flex;
           position: relative;
-          width: ${this.params.loaderWidth}px;
-          height: ${this.params.loaderHeight}px;
+          width: ${this.width}px;
+          height: ${this.height}px;
         }
 
         .loadership_${this.params.loaderVersion} div {
           position: absolute;
-          top: ${(this.params.loaderHeight - this.PerfectHeight) / 2}px;
           width: ${this.params.dotSize}px;
           height: ${this.params.dotSize}px;
           border-radius: 50%;
+          top: ${this.params.paddingY.toFixed(2)}px;
           background: ${this.params.dotColor};
           animation: loadership_${this.params.loaderVersion}_move alternate ${this.params.speed}s infinite;
           animation-timing-function: ${this.params.bezier};
@@ -155,8 +153,6 @@ export class LoaderDotLinearMotionBlurClass extends LoaderClass {
 
         ${tempStyles}
 
-        
-        
         @keyframes loadership_${this.params.loaderVersion}_move {
           0% {
             transform: translateX(0);
