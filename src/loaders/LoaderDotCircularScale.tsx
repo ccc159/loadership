@@ -164,7 +164,7 @@ export class LoaderDotCircularScaleClass extends LoaderClass {
           50% {
             opacity: 1;
           }
-    
+        }
     `;
     return styles;
   }
