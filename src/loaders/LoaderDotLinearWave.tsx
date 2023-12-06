@@ -149,11 +149,11 @@ export class LoaderDotLinearWaveClass extends LoaderClass {
 }
 
 const loader = new LoaderDotLinearWaveClass();
-const name = 'Loader Dot Linear Wave';
+const name = 'Dot Linear Wave';
 
 export const LoaderDotLinearWave: ILoader = {
   name,
-  slug: 'loader_dot_linear_wave',
+  slug: 'dot_linear_wave',
   date: new Date('2023/11/22'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,

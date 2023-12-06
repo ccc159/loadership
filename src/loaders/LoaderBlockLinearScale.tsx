@@ -200,11 +200,11 @@ export class LoaderBlockLinearScaleClass extends LoaderClass {
 }
 
 const loader = new LoaderBlockLinearScaleClass();
-const name = 'Loader Block Linear Scale';
+const name = 'Block Linear Scale';
 
 export const LoaderBlockLinearScale: ILoader = {
   name,
-  slug: 'loader_block_linear_scale',
+  slug: 'block_linear_scale',
   date: new Date('2023/12/05'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,

@@ -175,11 +175,11 @@ export class LoaderDotLinearBounceClass extends LoaderClass {
 }
 
 const loader = new LoaderDotLinearBounceClass();
-const name = 'Loader Dot Linear Bounce';
+const name = 'Dot Linear Bounce';
 
 export const LoaderDotLinearBounce: ILoader = {
   name,
-  slug: 'loader_dot_linear_bounce',
+  slug: 'dot_linear_bounce',
   date: new Date('2023/11/22'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,

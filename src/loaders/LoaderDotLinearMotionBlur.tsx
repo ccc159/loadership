@@ -171,11 +171,11 @@ export class LoaderDotLinearMotionBlurClass extends LoaderClass {
 }
 
 const loader = new LoaderDotLinearMotionBlurClass();
-const name = 'Loader Dot Linear Motion Blur';
+const name = 'Dot Linear Motion Blur';
 
 export const LoaderDotLinearMotionBlur: ILoader = {
   name,
-  slug: 'loader_dot_linear_motion_blur',
+  slug: 'dot_linear_motion_blur',
   date: new Date('2023/11/22'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,

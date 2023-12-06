@@ -153,11 +153,11 @@ export class LoaderStripeCircularClassicClass extends LoaderClass {
 }
 
 const loader = new LoaderStripeCircularClassicClass();
-const name = 'Loader Stripe Circular Classic';
+const name = 'Stripe Circular Classic';
 
 export const LoaderStripeCircularClassic: ILoader = {
   name,
-  slug: 'loader_stripe_circular_classic',
+  slug: 'stripe_circular_classic',
   date: new Date('2023/11/28'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,

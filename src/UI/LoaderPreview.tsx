@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export const LoaderPreview: React.FC<{ loader: ILoader }> = ({ loader }) => {
   // if it is within a month of the loader's release date, show the "New" badge
-  const isNew = (new Date().getTime() - loader.date.getTime()) / (1000 * 3600 * 24) < 30;
+  const isNew = (new Date().getTime() - loader.date.getTime()) / (1000 * 3600 * 24) < 10;
 
   return (
     <Link to={`/loaders/${loader.slug}`}>

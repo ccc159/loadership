@@ -159,11 +159,11 @@ export class LoaderStripeLinearBounceClass extends LoaderClass {
 }
 
 const loader = new LoaderStripeLinearBounceClass();
-const name = 'Loader Stripe Linear Bounce';
+const name = 'Stripe Linear Bounce';
 
 export const LoaderStripeLinearBounce: ILoader = {
   name,
-  slug: 'loader_stripe_linear_bounce',
+  slug: 'stripe_linear_bounce',
   date: new Date('2023/11/22'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,

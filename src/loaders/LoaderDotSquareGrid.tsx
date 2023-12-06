@@ -170,11 +170,11 @@ export class LoaderDotSquareGridClass extends LoaderClass {
 }
 
 const loader = new LoaderDotSquareGridClass();
-const name = 'Loader Dot Square Grid';
+const name = 'Dot Square Grid';
 
 export const LoaderDotSquareGrid: ILoader = {
   name,
-  slug: 'loader_dot_square_grid',
+  slug: 'dot_square_grid',
   date: new Date('2023/11/22'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,

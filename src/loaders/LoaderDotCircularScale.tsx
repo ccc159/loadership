@@ -171,11 +171,11 @@ export class LoaderDotCircularScaleClass extends LoaderClass {
 }
 
 const loader = new LoaderDotCircularScaleClass();
-const name = 'Loader Dot Circular Scale';
+const name = 'Dot Circular Scale';
 
 export const LoaderDotCircularScale: ILoader = {
   name,
-  slug: 'loader_dot_circular_scale',
+  slug: 'dot_circular_scale',
   date: new Date('2023/11/22'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,

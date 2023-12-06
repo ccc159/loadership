@@ -209,11 +209,11 @@ export class LoaderBlockGridScaleClass extends LoaderClass {
 }
 
 const loader = new LoaderBlockGridScaleClass();
-const name = 'Loader Block Grid Scale';
+const name = 'Block Grid Scale';
 
 export const LoaderBlockGridScale: ILoader = {
   name,
-  slug: 'loader_block_grid_scale',
+  slug: 'block_grid_scale',
   date: new Date('2023/12/05'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,

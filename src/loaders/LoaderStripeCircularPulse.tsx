@@ -161,11 +161,11 @@ export class LoaderStripeCircularPulseClass extends LoaderClass {
 }
 
 const loader = new LoaderStripeCircularPulseClass();
-const name = 'Loader Stripe Circular Pulse';
+const name = 'Stripe Circular Pulse';
 
 export const LoaderStripeCircularPulse: ILoader = {
   name,
-  slug: 'loader_stripe_circular_pulse',
+  slug: 'stripe_circular_pulse',
   date: new Date('2023/11/29'),
   component: <Configurator loader={loader} name={name} />,
   preview: <Configurator loader={loader} preview />,
