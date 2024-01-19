@@ -1,11 +1,8 @@
-import { useRef } from 'react';
 import { LoaderGrid } from './UI/LoaderGrid';
 import { Steps } from './UI/Steps';
 import { Features } from './UI/Features';
 
 function App() {
-  const gridRef = useRef<HTMLDivElement>(null);
-
   return (
     <section className='relative py-12 sm:py-14 lg:pt-16 xl:pb-0'>
       <div className='relative px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl'>
@@ -21,11 +18,10 @@ function App() {
             <div className='absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt'></div>
 
             <a
-              href='#'
+              href='#configurator'
               title=''
               className='relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-lp transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
               role='button'
-              onClick={() => gridRef.current?.scrollIntoView({ behavior: 'smooth' })}
             >
               Get started
             </a>
@@ -36,7 +32,7 @@ function App() {
       <Features />
       <Steps />
 
-      <div ref={gridRef} className='mt-16 md:mt-20'>
+      <div id='configurator' className='mt-16 md:mt-20'>
         <LoaderGrid />
       </div>
     </section>
