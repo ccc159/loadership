@@ -8,7 +8,6 @@
     <img width="80%" src="./loader.gif">
 </p>
 
-
 ### Features
 
 - Rich collection
@@ -40,11 +39,10 @@ bun install
 bun dev
 ```
 
-4. Open the browser and navigate to http://localhost:3000
+4. Open the browser and navigate to http://localhost:5173
 
 5. Build the project
 
 ```bash
 bun build
 ```
-

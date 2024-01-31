@@ -4,7 +4,7 @@ const MenuItem: React.FC<{ title: string; href: string; important?: boolean }> =
   if (important)
     return (
       <Link
-        className='px-5 py-2 text-base font-semibold leading-7 text-gray-900 transition-all duration-200 bg-transparent border border-gray-900 rounded-xl font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-900 hover:text-white focus:bg-gray-900 focus:text-white'
+        className='px-5 py-2 lg:text-base font-semibold leading-7 text-gray-900 transition-all duration-200 bg-transparent border border-gray-900 rounded-xl font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-900 hover:text-white focus:bg-gray-900 focus:text-white'
         to={href}
       >
         {title}
@@ -12,7 +12,10 @@ const MenuItem: React.FC<{ title: string; href: string; important?: boolean }> =
     );
 
   return (
-    <Link className='text-base font-medium text-dp transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-dp focus:ring-offset-2' to={href}>
+    <Link
+      className='text-sm lg:text-base font-medium text-dp transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-dp focus:ring-offset-2'
+      to={href}
+    >
       {title}
     </Link>
   );
@@ -41,7 +44,8 @@ export const Header = () => {
             <MenuItem title='License' href='/license' />
           </div> */}
 
-          <div className='hidden lg:flex lg:items-center lg:justify-center lg:space-x-10'>
+          <div className='flex lg:items-center lg:justify-center gap-2 lg:gap-4'>
+            <MenuItem title='Github' href='https://github.com/ccc159/loadership' />
             <MenuItem title='About' href='/about' />
           </div>
         </div>

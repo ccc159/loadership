@@ -1,6 +1,6 @@
 export const AboutPage = () => {
   return (
-    <section className='px-12 py-12 bg-white sm:px-6 sm:py-16 lg:px-20 lg:py-20 max-w-7xl m-auto'>
+    <section className='px-6 py-12 bg-white sm:px-6 sm:py-16 lg:px-20 lg:py-20 max-w-7xl flex-grow'>
       <div className='flex-col items-center justify-center'>
         <h1 className='text-3xl font-extrabold text-gray-900 sm:text-4xl'>About</h1>
         <div className='mt-6 text-base font-normal leading-7 text-gray-600 '>
@@ -13,7 +13,7 @@ export const AboutPage = () => {
             <h3 className='mt-12 text-xl font-bold text-gray-900'>Ownership</h3>
             Loadership is a side project of{' '}
             <a href='https://chen.works' target='_blank' className='text-[#827398]'>
-              Jingcheng Chen
+              <strong>Jingcheng Chen</strong>
             </a>
             .
           </div>
@@ -22,6 +22,28 @@ export const AboutPage = () => {
             <h3 className='mt-12 text-xl font-bold text-gray-900'>Credits</h3>
             The UI controls are based on the work of <em>Flowbite</em>. The landing page is inspired by <em>Landingfolio</em>. Some of the loaders are based on the work of <em>loading.io</em>.
           </div>
+        </div>
+        <h1 id='license' className='text-3xl font-extrabold text-gray-900 sm:text-4xl mt-12'>
+          Contribution
+        </h1>
+        <div className='mt-6 text-base font-normal leading-7 text-gray-600 '>
+          <p>
+            <span className='font-extrabold'>Loadership</span> has open-sourced its full code at{' '}
+            <a href='https://github.com/ccc159/loadership' target='_blank' className='text-[#827398]'>
+              <strong>Github</strong>
+            </a>
+            .
+          </p>
+          <p className='mt-3'>
+            If you have any feedback or questions to ask, please utilize the Github repo's{' '}
+            <a href='https://github.com/ccc159/loadership/issues' target='_blank' className='text-[#827398]'>
+              <strong>issues</strong>
+            </a>{' '}
+            and{' '}
+            <a href='https://github.com/ccc159/loadership/discussions' target='_blank' className='text-[#827398]'>
+              <strong>discussions</strong>
+            </a>{' '}
+          </p>
         </div>
         <h1 id='license' className='text-3xl font-extrabold text-gray-900 sm:text-4xl mt-12'>
           License

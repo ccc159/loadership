@@ -10,6 +10,12 @@ body {
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 .loader-preview {
   .loader-controls {
     display: none;
