@@ -1,30 +1,54 @@
-# React + TypeScript + Vite
+# Loadership.com
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div style="text-align: center;">
+    <img width="30%" src="./public/loadership_logo_text.svg">
+</div>
 
-Currently, two official plugins are available:
+[LoaderShip.com](https://loadership.com) is the ultimate CSS-only loader configuration tool that allows you to effortlessly customize and generate stunning loaders for your website. Simply Copy & Paste without any installation or dependency hassle.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<div style="text-align: center;">
+    <img width="50%" src="./loader.gif">
+</div>
 
-## Expanding the ESLint configuration
+### Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Rich collection
+- No login required
+- No dependencies
+- Customizable loaders
+- Completely free
+- Realtime preview
 
-- Configure the top-level `parserOptions` property like this:
+### Development
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+Loadership is scaffolded using vite + bun. To run the development server, follow the steps below:
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/ccc159/loadership.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Install dependencies
+
+```bash
+bun install
+```
+
+3. Run the development server
+
+```bash
+bun dev
+```
+
+4. Open the browser and navigate to http://localhost:3000
+
+5. Build the project
+
+```bash
+bun build
+```
+
+### License
+
+MIT

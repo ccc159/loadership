@@ -10,7 +10,7 @@ function App() {
           <p className='inline-flex px-4 py-2 text-base text-gray-900 border border-mp rounded-full font-pj bg-lp'>Made by Developers, for Developers</p>
           <h1 className='mt-5 text-4xl font-bold leading-tight text-gray-900 sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight font-pj'>CSS-only loader configurators</h1>
           <p className='max-w-xl mx-auto mt-6 text-base leading-7 text-gray-600 font-inter'>
-            LoaderShip is the ultimate CSS-only loader configuration tool that allows you to effortlessly customize and generate stunning loaders for your website. Simply Copy & Paste without any
+            LoaderShip is the ultimate CSS-only loader (or load spinner) configuration tool that allows you to customize and generate stunning loaders for your website. Simply Copy & Paste without any
             installation or dependency hassle.
           </p>
 
