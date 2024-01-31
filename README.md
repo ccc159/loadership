@@ -1,14 +1,13 @@
-# Loadership.com
-
-<div style="text-align: center;">
+<p align="center">
     <img width="30%" src="./public/loadership_logo_text.svg">
-</div>
+</p>
 
 [LoaderShip.com](https://loadership.com) is the ultimate CSS-only loader configuration tool that allows you to effortlessly customize and generate stunning loaders for your website. Simply Copy & Paste without any installation or dependency hassle.
 
-<div style="text-align: center;">
-    <img width="50%" src="./loader.gif">
-</div>
+<p align="center">
+    <img width="80%" src="./loader.gif">
+</p>
+
 
 ### Features
 
@@ -49,6 +48,3 @@ bun dev
 bun build
 ```
 
-### License
-
-MIT
